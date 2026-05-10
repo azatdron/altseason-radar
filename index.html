@@ -3,53 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Crypto Terminal</title>
+<title>Altseason Crypto Terminal v4</title>
 <link rel="manifest" href="manifest.json">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080d16;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;padding:calc(18px + env(safe-area-inset-top)) 16px 90px}
-h1{font-size:34px;margin:8px 0 2px;font-weight:800}
-.sub{color:#8d99aa;font-size:18px;margin-bottom:18px}
-.tabs{display:flex;gap:10px;position:sticky;top:0;background:linear-gradient(#080d16 70%,transparent);padding:10px 0;z-index:5}
-.tab{flex:1;text-align:center;padding:14px 8px;border-radius:17px;background:#151d2b;color:#b8c2d4;font-size:18px;font-weight:700}
-.tab.active{background:#2f8cff;color:white}
-.card{background:#111a2a;border:1px solid #1f2d44;border-radius:24px;padding:18px;margin:14px 0;box-shadow:0 10px 30px rgba(0,0,0,.22)}
-.hero{background:linear-gradient(135deg,#1486a7,#125d2c);padding:22px;border-radius:28px;margin:12px 0 18px}
-.hero .big{font-size:52px;font-weight:900;margin:6px 0}
-.small{color:#91a0b5;font-size:14px}
-.row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #1d2a3f;padding:12px 0}
+body{margin:0;background:#070c14;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;padding:calc(16px + env(safe-area-inset-top)) 14px 90px}
+h1{font-size:31px;margin:8px 0 2px;font-weight:900}
+h2{font-size:24px;margin:0 0 12px}
+.sub{color:#8d99aa;font-size:17px;margin-bottom:14px}
+.tabs{display:flex;gap:9px;position:sticky;top:0;background:linear-gradient(#070c14 75%,transparent);padding:8px 0 10px;z-index:10}
+.tab{flex:1;text-align:center;padding:13px 6px;border-radius:17px;background:#141b29;color:#b9c4d6;font-size:17px;font-weight:800}
+.tab.active{background:#2f8cff;color:#fff}
+.card{background:#101827;border:1px solid #23314a;border-radius:24px;padding:16px;margin:13px 0}
+.hero{background:linear-gradient(135deg,#1589aa,#12612f);padding:20px;border-radius:28px;margin:10px 0 16px}
+.big{font-size:50px;font-weight:950;margin:4px 0}
+.small{color:#91a0b5;font-size:13px}
+.row{border-bottom:1px solid #1d2a3f;padding:13px 0}
 .row:last-child{border-bottom:0}
-.name{font-size:18px;font-weight:800}
+.metricTop{display:flex;justify-content:space-between;gap:10px}
+.name{font-size:18px;font-weight:900}
 .desc{font-size:13px;color:#8fa0b8;margin-top:4px}
-.val{text-align:right;font-size:21px;font-weight:900}
-.pct{font-size:14px;color:#9badc8;margin-top:3px}
-.bar{height:9px;background:#1c2b44;border-radius:20px;margin-top:10px;overflow:hidden}
-.fill{height:100%;border-radius:20px;background:#ffb020;width:0}
+.val{text-align:right;font-size:21px;font-weight:950}
+.pct{font-size:14px;color:#9badc8;margin-top:2px}
+.bar{height:8px;background:#1c2b44;border-radius:20px;margin-top:9px;overflow:hidden}
+.fill{height:100%;border-radius:20px;width:0}
 .green{color:#38d985}.red{color:#ff5252}.yellow{color:#ffd166}.blue{color:#50a7ff}
 .good{background:#38d985}.bad{background:#ff5252}.mid{background:#ffb020}
-input,select{width:100%;padding:15px;border:0;border-radius:16px;background:#192334;color:white;font-size:17px;margin:8px 0}
-button{width:100%;padding:15px;border:0;border-radius:17px;background:#2f8cff;color:#fff;font-size:17px;font-weight:800;margin-top:8px}
+input{width:100%;padding:14px;border:0;border-radius:15px;background:#192334;color:white;font-size:16px;margin:7px 0}
+button{width:100%;padding:14px;border:0;border-radius:16px;background:#2f8cff;color:#fff;font-size:16px;font-weight:900;margin-top:8px}
 button.secondary{background:#1b2638}
+button.remove{background:#341c24;color:#ff7070}
 .hidden{display:none}
 .suggestions{background:#121b2a;border-radius:16px;max-height:240px;overflow:auto;margin-top:4px}
 .sug{padding:13px;border-bottom:1px solid #22304a}
-.coincard{background:#0f1726;border:1px solid #25344d;border-radius:22px;padding:16px;margin:12px 0}
-.coinTop{display:flex;justify-content:space-between;gap:8px}
-.coinTitle{font-size:22px;font-weight:900}
-.coinSub{color:#8fa0b8;margin-top:4px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.box{background:#172235;border-radius:16px;padding:12px}
-.label{color:#8fa0b8;font-size:13px}
-.num{font-size:19px;font-weight:900;margin-top:4px}
-.note{font-size:15px;line-height:1.45;color:#c7d2e5}
-.badge{display:inline-block;padding:7px 10px;border-radius:99px;background:#172235;color:#9fb1cc;font-size:13px;font-weight:800}
-.remove{background:#341c24;color:#ff7070;margin-top:12px}
+.note{font-size:15px;line-height:1.45;color:#c9d5e8}
+.coinItem{background:#101827;border:1px solid #24344f;border-radius:20px;margin:10px 0;overflow:hidden}
+.coinHead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px}
+.coinLeft{min-width:0}
+.coinSymbol{font-size:23px;font-weight:950}
+.coinName{color:#91a0b5;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.coinRight{text-align:right}
+.coinValue{font-size:18px;font-weight:950}
+.coinPnl{font-size:15px;font-weight:900;margin-top:3px}
+.coinDetails{display:none;border-top:1px solid #20304a;padding:13px}
+.coinItem.open .coinDetails{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.box{background:#172235;border-radius:15px;padding:11px}
+.label{color:#8fa0b8;font-size:12px}
+.num{font-size:17px;font-weight:900;margin-top:4px}
+.badge{display:inline-block;padding:6px 9px;border-radius:99px;background:#172235;color:#9fb1cc;font-size:13px;font-weight:900}
 </style>
 </head>
 <body>
 
 <h1>🚀 Altseason Terminal</h1>
-<div class="sub">Полный радар рынка + портфель</div>
+<div class="sub">Радар рынка + компактный портфель</div>
 
 <div class="tabs">
   <div class="tab active" onclick="showTab('radar')">Радар</div>
@@ -61,16 +69,16 @@ button.secondary{background:#1b2638}
   <div class="hero">
     <div>Готовность рынка</div>
     <div class="big" id="score">...</div>
-    <div id="scoreText">Загрузка данных...</div>
+    <div id="scoreText">Загрузка...</div>
   </div>
 
   <div class="card">
-    <h2>📌 Основные ориентиры</h2>
+    <h2>📌 Основные</h2>
     <div id="mainMetrics"></div>
   </div>
 
   <div class="card">
-    <h2>➕ Дополнительные ориентиры</h2>
+    <h2>➕ Дополнительные</h2>
     <div id="extraMetrics"></div>
   </div>
 
@@ -83,12 +91,12 @@ button.secondary{background:#1b2638}
 <section id="portfolio" class="hidden">
   <div class="card">
     <h2>➕ Добавить монету</h2>
-    <input id="coinSearch" placeholder="Начни вводить: BTC, ETH, SOL, APT...">
+    <input id="coinSearch" placeholder="Поиск: BTC, ETH, SOL, SUI...">
     <div id="suggestions" class="suggestions hidden"></div>
-    <input id="amount" type="number" step="any" placeholder="Количество монет">
+    <input id="amount" type="number" step="any" placeholder="Количество">
     <input id="avgPrice" type="number" step="any" placeholder="Средняя цена покупки $">
     <input id="buyDate" type="date">
-    <button onclick="addHolding()">Добавить в портфель</button>
+    <button onclick="addHolding()">Добавить</button>
   </div>
 
   <div class="hero">
@@ -106,20 +114,21 @@ button.secondary{background:#1b2638}
     <input id="coinglassKey" placeholder="CoinGlass API Key">
     <input id="coingeckoKey" placeholder="CoinGecko API Key, если есть">
     <button onclick="saveKeys()">Сохранить ключи</button>
-    <p class="small">Ключи хранятся только на твоём iPhone в localStorage.</p>
+    <p class="small">Ключи хранятся только на твоём iPhone.</p>
   </div>
 
   <div class="card">
     <h2>✍️ Ручные метрики</h2>
-    <p class="small">Некоторые ориентиры из скрина нельзя стабильно получить без платных/закрытых API, поэтому их можно вписывать вручную.</p>
     <input id="altsznManual" placeholder="Altseason Index, например 75">
-    <input id="volumeManual" placeholder="Daily exchange volume, например 160B">
+    <input id="volumeManual" placeholder="Daily exchange volume, например 160">
     <input id="rutManual" placeholder="RUT, например 2600">
     <input id="ismManual" placeholder="ISM PMI, например 58">
     <input id="googleBtcManual" placeholder="Google Trends Bitcoin, например 60">
     <input id="googleCryptoManual" placeholder="Google Trends Crypto, например 45">
-    <input id="coinbaseManual" placeholder="Coinbase App Store rank, например 14">
-    <button onclick="saveManual()">Сохранить ручные метрики</button>
+    <input id="coinbaseManual" placeholder="Coinbase rank, например 14">
+    <input id="copperGoldManual" placeholder="Copper/Gold, например 0.0024">
+    <input id="btcGoldManual" placeholder="BTC/Gold, например 50">
+    <button onclick="saveManual()">Сохранить</button>
   </div>
 </section>
 
@@ -127,23 +136,22 @@ button.secondary{background:#1b2638}
 let state={};
 let selectedCoin=null;
 let coinList=[];
-let portfolio=JSON.parse(localStorage.getItem("portfolio_v3")||"[]");
+let portfolio=JSON.parse(localStorage.getItem("portfolio_v4")||"[]");
 
 function showTab(id){
   ["radar","portfolio","keys"].forEach(x=>document.getElementById(x).classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  const i=id==="radar"?0:id==="portfolio"?1:2;
-  document.querySelectorAll(".tab")[i].classList.add("active");
+  document.querySelectorAll(".tab")[id==="radar"?0:id==="portfolio"?1:2].classList.add("active");
   if(id==="portfolio") renderPortfolio();
 }
 
-function cls(ok,mid){return ok?"green":mid?"yellow":"red"}
-function clamp(n){return Math.max(0,Math.min(100,Math.round(n)))}
+function clamp(n){return Math.max(0,Math.min(100,Math.round(n||0)))}
 function money(n){return "$"+Number(n||0).toLocaleString("en-US",{maximumFractionDigits:2})}
-
+function pct(n){return Number(n||0).toFixed(2)+"%"}
 function progress(value,target,mode){
-  if(value===null||value===undefined||isNaN(value))return 0;
+  value=Number(value);
+  if(!value||isNaN(value))return 0;
   if(mode==="lower") return clamp((target/value)*100);
   if(mode==="higher") return clamp((value/target)*100);
   if(mode==="range"){
@@ -155,82 +163,109 @@ function progress(value,target,mode){
 }
 
 function metricHTML(m){
-  let v=m.value;
-  let display=v===null||v===undefined||v===""?"—":m.format?m.format(v):v;
   let p=m.progress||0;
   let color=p>=80?"green":p>=55?"yellow":"red";
+  let display=(m.value===null||m.value===undefined||m.value===""||isNaN(m.value)&&typeof m.value!=="string")?"—":(m.format?m.format(m.value):m.value);
   return `<div class="row">
-    <div style="flex:1">
-      <div class="name">${m.title}</div>
-      <div class="desc">${m.goal}</div>
-      <div class="bar"><div class="fill ${p>=80?'good':p>=55?'mid':'bad'}" style="width:${p}%"></div></div>
+    <div class="metricTop">
+      <div>
+        <div class="name">${m.title}</div>
+        <div class="desc">${m.goal}</div>
+      </div>
+      <div class="val ${color}">
+        ${display}
+        <div class="pct">${p}%</div>
+      </div>
     </div>
-    <div class="val ${color}">
-      ${display}
-      <div class="pct">${p}%</div>
-    </div>
+    <div class="bar"><div class="fill ${p>=80?'good':p>=55?'mid':'bad'}" style="width:${p}%"></div></div>
   </div>`;
 }
 
+async function cg(path){
+  const key=localStorage.getItem("coingeckoKey")||"";
+  const headers=key?{"x-cg-demo-api-key":key}:{};
+  return fetch(path,{headers}).then(r=>r.json());
+}
+
 async function loadMarket(){
-  const manual=JSON.parse(localStorage.getItem("manual_v3")||"{}");
+  const manual=JSON.parse(localStorage.getItem("manual_v4")||"{}");
   try{
-    const global=await fetch("https://api.coingecko.com/api/v3/global").then(r=>r.json());
+    const global=await cg("https://api.coingecko.com/api/v3/global");
     const mp=global.data.market_cap_percentage;
     state.btcD=mp.btc;
     state.ethD=mp.eth;
+    state.usdtD=mp.usdt||0;
+    state.usdcD=mp.usdc||0;
     state.total=global.data.total_market_cap.usd;
 
-    const price=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd,btc&include_market_cap=true&include_24hr_vol=true").then(r=>r.json());
+    const ids="bitcoin,ethereum,tether,usd-coin";
+    const price=await cg(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,btc&include_market_cap=true&include_24hr_vol=true`);
     state.btc=price.bitcoin.usd;
     state.eth=price.ethereum.usd;
     state.ethbtc=price.ethereum.btc;
-    state.volume=price.bitcoin.usd_24h_vol+price.ethereum.usd_24h_vol;
+    state.btcMcap=price.bitcoin.usd_market_cap;
+    state.ethMcap=price.ethereum.usd_market_cap;
+    state.usdtMcap=price.tether.usd_market_cap;
+    state.usdcMcap=price["usd-coin"].usd_market_cap;
+    state.dailyVol=((price.bitcoin.usd_24h_vol||0)+(price.ethereum.usd_24h_vol||0))/1e9;
 
     const fng=await fetch("https://api.alternative.me/fng/").then(r=>r.json());
     state.fear=Number(fng.data[0].value);
+
+    state.total2=state.total-state.btcMcap;
+    state.total3=state.total-state.btcMcap-state.ethMcap;
+    state.others=state.total3-state.usdtMcap-state.usdcMcap;
+    state.total3btc=state.total3/state.btcMcap;
+    state.othersbtc=state.others/state.btcMcap;
+    state.othersD=(state.others/state.total)*100;
   }catch(e){console.log(e)}
 
+  const stablePack=state.btcD+state.ethD+state.usdtD+state.usdcD;
+
   const main=[
-    {title:"BTC.D",goal:"Цель 40–45%",value:state.btcD,format:v=>v.toFixed(2)+"%",progress:progress(state.btcD,[40,45],"range")},
-    {title:"ETH/BTC",goal:"Цель 0.045–0.050",value:state.ethbtc,format:v=>v.toFixed(4),progress:progress(state.ethbtc,0.045,"higher")},
-    {title:"OTHERS/BTC",goal:"Цель 0.5+",value:null,progress:0},
-    {title:"TOTAL3/BTC",goal:"Цель 0.85+",value:null,progress:0},
-    {title:"OTHERS.D",goal:"Цель 17–22%",value:null,progress:0},
-    {title:"RUT",goal:"Цель 2500–2700+",value:manual.rut,progress:progress(Number(manual.rut),2500,"higher")},
-    {title:"ISM PMI",goal:"Цель 57–60",value:manual.ism,progress:progress(Number(manual.ism),57,"higher")},
-    {title:"Copper/Gold",goal:"Цель 0.0023–0.0025",value:null,progress:0},
-    {title:"BTC/Gold",goal:"Цель 50+",value:null,progress:0},
+    {title:"BTC.D",goal:"Цель 40–45%",value:state.btcD,format:pct,progress:progress(state.btcD,[40,45],"range")},
+    {title:"ETH/BTC",goal:"Цель 0.045–0.050",value:state.ethbtc,format:v=>Number(v).toFixed(4),progress:progress(state.ethbtc,0.045,"higher")},
+    {title:"OTHERS/BTC",goal:"Цель 0.5+",value:state.othersbtc,format:v=>Number(v).toFixed(3),progress:progress(state.othersbtc,0.5,"higher")},
+    {title:"TOTAL3/BTC",goal:"Цель 0.85+",value:state.total3btc,format:v=>Number(v).toFixed(3),progress:progress(state.total3btc,0.85,"higher")},
+    {title:"OTHERS.D",goal:"Цель 17–22%",value:state.othersD,format:pct,progress:progress(state.othersD,[17,22],"range")},
+    {title:"RUT",goal:"Цель 2500–2700+",value:manual.rut,progress:progress(manual.rut,2500,"higher")},
+    {title:"ISM PMI",goal:"Цель 57–60",value:manual.ism,progress:progress(manual.ism,57,"higher")},
+    {title:"Copper/Gold",goal:"Цель 0.0023–0.0025",value:manual.copperGold,progress:progress(manual.copperGold,[0.0023,0.0025],"range")},
+    {title:"BTC/Gold",goal:"Цель 50+",value:manual.btcGold,progress:progress(manual.btcGold,50,"higher")},
     {title:"BTC",goal:"Цель от $150k",value:state.btc,format:money,progress:progress(state.btc,150000,"higher")},
     {title:"ETH",goal:"Цель от $7k",value:state.eth,format:money,progress:progress(state.eth,7000,"higher")},
-    {title:"ETH.D",goal:"Цель 20%",value:state.ethD,format:v=>v.toFixed(2)+"%",progress:progress(state.ethD,20,"higher")}
+    {title:"ETH.D",goal:"Цель 20%",value:state.ethD,format:pct,progress:progress(state.ethD,20,"higher")}
   ];
 
   const extra=[
-    {title:"BTC.D + ETH.D",goal:"Цель 58–60%",value:state.btcD&&state.ethD?state.btcD+state.ethD:null,format:v=>v.toFixed(2)+"%",progress:progress(state.btcD+state.ethD,[58,60],"range")},
-    {title:"BTC.D + ETH.D + USDT.D + USDC.D",goal:"Цель 67–68%",value:null,progress:0},
-    {title:"Daily exchange volume",goal:"Цель 160B+",value:manual.volume,progress:progress(parseFloat(manual.volume),160,"higher")},
-    {title:"Altseason Index",goal:"Цель 75+ минимум 1 мес.",value:manual.altszn,progress:progress(Number(manual.altszn),75,"higher")},
+    {title:"BTC.D + ETH.D",goal:"Цель 58–60%",value:state.btcD+state.ethD,format:pct,progress:progress(state.btcD+state.ethD,[58,60],"range")},
+    {title:"BTC.D + ETH.D + USDT.D + USDC.D",goal:"Цель 67–68%",value:stablePack,format:pct,progress:progress(stablePack,[67,68],"range")},
+    {title:"Daily exchange volume",goal:"Цель 160B+",value:manual.volume||state.dailyVol,format:v=>Number(v).toFixed(1)+"B",progress:progress(manual.volume||state.dailyVol,160,"higher")},
+    {title:"Altseason Index",goal:"Цель 75+ минимум 1 мес.",value:manual.altszn,progress:progress(manual.altszn,75,"higher")},
     {title:"Fear & Greed",goal:"Выше 55 — риск-он",value:state.fear,progress:progress(state.fear,55,"higher")},
-    {title:"Google Trends Bitcoin",goal:"Цель 60+",value:manual.googleBtc,progress:progress(Number(manual.googleBtc),60,"higher")},
-    {title:"Google Trends Crypto",goal:"Цель 40–50+",value:manual.googleCrypto,progress:progress(Number(manual.googleCrypto),40,"higher")},
-    {title:"Coinbase App Store",goal:"Цель rank < 15",value:manual.coinbase,progress:Number(manual.coinbase)?progress(Number(manual.coinbase),15,"lower"):0}
+    {title:"Google Trends Bitcoin",goal:"Цель 60+",value:manual.googleBtc,progress:progress(manual.googleBtc,60,"higher")},
+    {title:"Google Trends Crypto",goal:"Цель 40–50+",value:manual.googleCrypto,progress:progress(manual.googleCrypto,40,"higher")},
+    {title:"Coinbase App Store",goal:"Цель rank < 15",value:manual.coinbase,progress:manual.coinbase?progress(manual.coinbase,15,"lower"):0}
   ];
 
   document.getElementById("mainMetrics").innerHTML=main.map(metricHTML).join("");
   document.getElementById("extraMetrics").innerHTML=extra.map(metricHTML).join("");
 
-  const all=[...main,...extra].filter(x=>x.progress>0);
-  const score=Math.round(all.reduce((a,b)=>a+b.progress,0)/all.length);
+  const real=[...main,...extra].filter(x=>x.progress>0);
+  const score=Math.round(real.reduce((a,b)=>a+b.progress,0)/real.length);
   document.getElementById("score").textContent=score+"%";
-  document.getElementById("scoreText").textContent=score<40?"BTC-сезон":score<65?"Ранний переход к альтам":score<80?"Альтсезон близко":"Альтсезон / перегрев";
+  document.getElementById("scoreText").textContent=score<40?"BTC-сезон":score<65?"Ранний переход":score<80?"Альтсезон близко":"Альтсезон / перегрев";
 
-  let conclusion="";
-  if(score<40) conclusion="Пока рынок больше похож на BTC-сезон. Альты могут отставать. Лучше не торопиться с агрессивным набором.";
-  else if(score<65) conclusion="Идёт переходная фаза. Часть условий уже улучшается, но подтверждений ещё мало. Самое важное: снижение BTC.D, рост ETH/BTC и рост Altseason Index.";
-  else if(score<80) conclusion="Рынок уже близок к фазе сильных альтов. Можно внимательнее следить за портфелем и заранее планировать зоны фиксации.";
-  else conclusion="Высокая готовность. Это зона, где альты могут резко расти, но и риск перегрева выше. Нужен план выхода.";
-  document.getElementById("marketConclusion").textContent=conclusion;
+  let c=[];
+  if(state.btcD>55)c.push("BTC.D ещё высокая — альты пока под давлением.");
+  else c.push("BTC.D снижается — это плюс для альтов.");
+  if(state.ethbtc<0.035)c.push("ETH/BTC слабый, подтверждения альтсезона пока нет.");
+  else c.push("ETH/BTC оживает — хороший сигнал.");
+  if(state.othersD<17)c.push("OTHERS.D ниже целевой зоны — широкий рынок альтов ещё не разогнался.");
+  else c.push("OTHERS.D в рабочей зоне — деньги идут в альты.");
+  if(state.fear<55)c.push("Fear & Greed нейтральный/слабый — эйфории пока нет.");
+  else c.push("Risk-on усиливается.");
+  document.getElementById("marketConclusion").textContent=c.join(" ");
 }
 
 async function loadCoinList(){
@@ -247,7 +282,7 @@ document.getElementById("coinSearch").addEventListener("input",e=>{
   const q=e.target.value.toLowerCase().trim();
   const box=document.getElementById("suggestions");
   if(q.length<1){box.classList.add("hidden");return}
-  const res=coinList.filter(c=>c.symbol.includes(q)||c.name.toLowerCase().includes(q)).slice(0,30);
+  const res=coinList.filter(c=>c.symbol.toLowerCase().includes(q)||c.name.toLowerCase().includes(q)).slice(0,25);
   box.innerHTML=res.map(c=>`<div class="sug" onclick="selectCoin('${c.id}','${c.symbol}','${c.name.replace(/'/g,"")}')"><b>${c.symbol.toUpperCase()}</b> — ${c.name}</div>`).join("");
   box.classList.remove("hidden");
 });
@@ -265,7 +300,7 @@ function addHolding(){
   const date=document.getElementById("buyDate").value;
   if(!amount||!avg){alert("Введи количество и среднюю цену");return}
   portfolio.push({...selectedCoin,amount,avg,date});
-  localStorage.setItem("portfolio_v3",JSON.stringify(portfolio));
+  localStorage.setItem("portfolio_v4",JSON.stringify(portfolio));
   document.getElementById("amount").value="";
   document.getElementById("avgPrice").value="";
   document.getElementById("buyDate").value="";
@@ -276,16 +311,17 @@ function addHolding(){
 
 async function renderPortfolio(){
   if(!portfolio.length){
-    document.getElementById("holdings").innerHTML=`<div class="card">Пока монет нет. Добавь первую монету через поиск.</div>`;
+    document.getElementById("holdings").innerHTML=`<div class="card">Пока монет нет.</div>`;
+    document.getElementById("portfolioValue").textContent="$0";
+    document.getElementById("portfolioPnl").textContent="PnL: $0";
     return;
   }
-  const ids=portfolio.map(x=>x.id).join(",");
+  const ids=[...new Set(portfolio.map(x=>x.id))].join(",");
   let prices={};
   try{
-    prices=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`).then(r=>r.json());
+    prices=await cg(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
   }catch(e){}
-  let total=0, invested=0;
-  let html="";
+  let total=0, invested=0, html="";
   portfolio.forEach((c,i)=>{
     const p=prices[c.id]?.usd||0;
     const ch=prices[c.id]?.usd_24h_change||0;
@@ -294,25 +330,30 @@ async function renderPortfolio(){
     const pnl=val-inv;
     const pnlPct=inv?pnl/inv*100:0;
     total+=val; invested+=inv;
-    html+=`<div class="coincard">
-      <div class="coinTop">
-        <div>
-          <div class="coinTitle">${c.symbol.toUpperCase()}</div>
-          <div class="coinSub">${c.name}</div>
+    html+=`<div class="coinItem" id="coin-${i}">
+      <div class="coinHead" onclick="toggleCoin(${i})">
+        <div class="coinLeft">
+          <div class="coinSymbol">${c.symbol.toUpperCase()}</div>
+          <div class="coinName">${c.name}</div>
         </div>
-        <div class="badge">${ch>=0?"+":""}${ch.toFixed(2)}% 24ч</div>
+        <div class="coinRight">
+          <div class="coinValue">${money(val)}</div>
+          <div class="coinPnl ${pnl>=0?'green':'red'}">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</div>
+        </div>
       </div>
-      <div class="grid">
-        <div class="box"><div class="label">Количество</div><div class="num">${c.amount}</div></div>
-        <div class="box"><div class="label">Цена сейчас</div><div class="num">${money(p)}</div></div>
-        <div class="box"><div class="label">Средняя покупка</div><div class="num">${money(c.avg)}</div></div>
-        <div class="box"><div class="label">Стоимость</div><div class="num">${money(val)}</div></div>
+      <div class="coinDetails">
+        <div class="grid">
+          <div class="box"><div class="label">Количество</div><div class="num">${c.amount}</div></div>
+          <div class="box"><div class="label">Цена сейчас</div><div class="num">${money(p)}</div></div>
+          <div class="box"><div class="label">Средняя</div><div class="num">${money(c.avg)}</div></div>
+          <div class="box"><div class="label">24ч</div><div class="num ${ch>=0?'green':'red'}">${ch>=0?'+':''}${ch.toFixed(2)}%</div></div>
+        </div>
+        <div class="box" style="margin-top:9px">
+          <div class="label">Прибыль / убыток</div>
+          <div class="num ${pnl>=0?'green':'red'}">${money(pnl)} (${pnlPct.toFixed(2)}%)</div>
+        </div>
+        <button class="remove" onclick="removeHolding(${i})">Удалить</button>
       </div>
-      <div class="box" style="margin-top:10px">
-        <div class="label">Прибыль / убыток</div>
-        <div class="num ${pnl>=0?'green':'red'}">${money(pnl)} (${pnlPct.toFixed(2)}%)</div>
-      </div>
-      <button class="remove" onclick="removeHolding(${i})">Удалить</button>
     </div>`;
   });
   const pnl=total-invested;
@@ -321,9 +362,10 @@ async function renderPortfolio(){
   document.getElementById("holdings").innerHTML=html;
 }
 
+function toggleCoin(i){document.getElementById("coin-"+i).classList.toggle("open")}
 function removeHolding(i){
   portfolio.splice(i,1);
-  localStorage.setItem("portfolio_v3",JSON.stringify(portfolio));
+  localStorage.setItem("portfolio_v4",JSON.stringify(portfolio));
   renderPortfolio();
 }
 
@@ -341,24 +383,23 @@ function saveManual(){
     ism:document.getElementById("ismManual").value,
     googleBtc:document.getElementById("googleBtcManual").value,
     googleCrypto:document.getElementById("googleCryptoManual").value,
-    coinbase:document.getElementById("coinbaseManual").value
+    coinbase:document.getElementById("coinbaseManual").value,
+    copperGold:document.getElementById("copperGoldManual").value,
+    btcGold:document.getElementById("btcGoldManual").value
   };
-  localStorage.setItem("manual_v3",JSON.stringify(manual));
+  localStorage.setItem("manual_v4",JSON.stringify(manual));
   loadMarket();
-  alert("Ручные метрики сохранены");
+  alert("Сохранено");
 }
 
 function loadSaved(){
   document.getElementById("coinglassKey").value=localStorage.getItem("coinglassKey")||"";
   document.getElementById("coingeckoKey").value=localStorage.getItem("coingeckoKey")||"";
-  const m=JSON.parse(localStorage.getItem("manual_v3")||"{}");
-  document.getElementById("altsznManual").value=m.altszn||"";
-  document.getElementById("volumeManual").value=m.volume||"";
-  document.getElementById("rutManual").value=m.rut||"";
-  document.getElementById("ismManual").value=m.ism||"";
-  document.getElementById("googleBtcManual").value=m.googleBtc||"";
-  document.getElementById("googleCryptoManual").value=m.googleCrypto||"";
-  document.getElementById("coinbaseManual").value=m.coinbase||"";
+  const m=JSON.parse(localStorage.getItem("manual_v4")||"{}");
+  ["altszn","volume","rut","ism","googleBtc","googleCrypto","coinbase","copperGold","btcGold"].forEach(k=>{
+    const id=k+"Manual";
+    if(document.getElementById(id))document.getElementById(id).value=m[k]||"";
+  });
 }
 
 loadSaved();
