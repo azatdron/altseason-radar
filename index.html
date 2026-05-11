@@ -3,37 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v6.4</title>
+<title>Altseason Terminal v6.5</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#070b14;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:14px 12px 90px}
 h1{font-size:28px;font-weight:900}.sub{font-size:14px;color:#8b97aa;margin:4px 0 12px}
 .tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;background:#121b2d;color:#b7c1d3;border-radius:16px;padding:10px;text-align:center;font-size:15px;font-weight:800}.tab.active{background:#2f8cff;color:#fff}
 .section{display:none}.section.active{display:block}.hero{background:linear-gradient(135deg,#138ca8,#106b36);border-radius:22px;padding:14px;margin-bottom:10px}.score{font-size:42px;font-weight:950}.status{font-size:14px;color:#e8f2ff}
-.gridMetrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{background:#101827;border:1px solid #22314a;border-radius:18px;padding:10px}.mName{font-size:16px;font-weight:900}.mGoal{font-size:11px;color:#8e9bb1;margin:2px 0 6px}.mVal{font-size:20px;font-weight:950}.mPct{font-size:12px;color:#9ba8bd}.bar{height:6px;background:#1b2b45;border-radius:99px;margin-top:7px;overflow:hidden}.fill{height:100%;border-radius:99px}
+.gridMetrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric,.signal{background:#101827;border:1px solid #22314a;border-radius:18px;padding:10px}.mName{font-size:16px;font-weight:900}.mGoal{font-size:11px;color:#8e9bb1;margin:2px 0 6px}.mVal{font-size:20px;font-weight:950}.mPct{font-size:12px;color:#9ba8bd}.bar{height:6px;background:#1b2b45;border-radius:99px;margin-top:7px;overflow:hidden}.fill{height:100%;border-radius:99px}
 .green{color:#37d67a}.yellow{color:#ffc64d}.red{color:#ff5b5b}.fill.green{background:#37d67a}.fill.yellow{background:#ffb020}.fill.red{background:#ff5b5b}
 .card{background:#101827;border:1px solid #22314a;border-radius:20px;padding:12px;margin:10px 0}h2{font-size:20px;margin-bottom:10px}
 input{width:100%;background:#182335;border:0;border-radius:14px;padding:12px;color:white;font-size:15px;margin:6px 0}button{width:100%;background:#2f8cff;color:#fff;border:0;border-radius:15px;padding:12px;font-size:16px;font-weight:900;margin-top:8px}
 .coin{background:#101827;border:1px solid #22314a;border-radius:18px;margin:8px 0;overflow:hidden}.coinHead{display:flex;justify-content:space-between;padding:12px}.coinSym{font-size:20px;font-weight:950}.coinName{font-size:12px;color:#8e9bb1}.coinVal{text-align:right;font-size:17px;font-weight:900}.coinPnl{text-align:right;font-size:13px;font-weight:800}.details{display:none;border-top:1px solid #22314a;padding:10px}.coin.open .details{display:block}
 .boxGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.box{background:#172235;border-radius:12px;padding:9px}.lbl{font-size:11px;color:#8e9bb1}.num{font-size:15px;font-weight:900;margin-top:3px}
 .sug{padding:10px;border-bottom:1px solid #22314a;background:#121b2d}.suggestions{border-radius:14px;overflow:hidden;max-height:200px;overflow-y:auto}.hidden{display:none}
+.signal{margin-bottom:8px}.sigTop{display:flex;justify-content:space-between;gap:8px}.sigTitle{font-weight:900;font-size:15px}.sigText{font-size:12px;color:#8e9bb1;margin-top:3px}.sigBadge{font-size:12px;font-weight:900}
 </style>
 </head>
 <body>
 
 <h1>Altseason Terminal</h1>
-<div class="sub">Компактный радар текущего альтсезона</div>
+<div class="sub">Радар, портфель и сигналы</div>
 
 <div class="tabs">
 <div class="tab active" onclick="tab('radar',this)">Радар</div>
 <div class="tab" onclick="tab('portfolio',this)">Портфель</div>
+<div class="tab" onclick="tab('signals',this)">Сигналы</div>
 <div class="tab" onclick="tab('keys',this)">Ключи</div>
 </div>
 
 <section id="radar" class="section active">
 <div class="hero"><div>Готовность рынка</div><div class="score" id="score">...</div><div class="status" id="status">Загрузка...</div></div>
 <div class="gridMetrics" id="metrics"></div>
-<div class="card"><h2>Вывод</h2><div id="conclusion" style="font-size:14px;color:#c8d3e5;line-height:1.35">Загрузка...</div><button onclick="loadMarket()">Обновить</button></div>
+<div class="card"><h2>Вывод</h2><div id="conclusion" style="font-size:14px;color:#c8d3e5;line-height:1.35">Загрузка...</div><button onclick="refreshAll()">Обновить</button></div>
 </section>
 
 <section id="portfolio" class="section">
@@ -48,6 +50,14 @@ input{width:100%;background:#182335;border:0;border-radius:14px;padding:12px;col
 </div>
 <div class="hero"><div>Портфель</div><div class="score" id="portfolioTotal">$0</div><div class="status" id="portfolioPnl">PnL: $0</div></div>
 <div id="coins"></div>
+</section>
+
+<section id="signals" class="section">
+<div class="card">
+<h2>Сигналы</h2>
+<div id="signalList">Загрузка...</div>
+<button onclick="refreshAll()">Проверить сейчас</button>
+</div>
 </section>
 
 <section id="keys" class="section">
@@ -75,8 +85,10 @@ const map={btc:"bitcoin",bitcoin:"bitcoin",eth:"ethereum",ethereum:"ethereum",so
 
 let selected=null;
 let portfolio=JSON.parse(localStorage.getItem("portfolioCompact")||"[]");
+let lastMarket={};
+let lastPrices={};
 
-function tab(id,el){document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));el.classList.add("active");if(id==="portfolio")renderPortfolio()}
+function tab(id,el){document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));el.classList.add("active");if(id==="portfolio")renderPortfolio();if(id==="signals")renderSignals()}
 function money(n){return "$"+Number(n||0).toLocaleString("en-US",{maximumFractionDigits:2})}
 function pct(n){return Number(n||0).toFixed(2)+"%"}
 function clamp(n){return Math.max(0,Math.min(100,Math.round(n||0)))}
@@ -91,6 +103,8 @@ let found=direct.find(c=>c.id===id||c.symbol.toLowerCase()===q||c.name.toLowerCa
 return found||{id:id,symbol:q.toUpperCase(),name:text};
 }
 
+async function refreshAll(){await loadMarket();await renderPortfolio();renderSignals()}
+
 async function loadMarket(){
 let m=JSON.parse(localStorage.getItem("manualCompact")||"{}"),s={};
 try{
@@ -102,6 +116,8 @@ s.total3=s.total-p.bitcoin.usd_market_cap-p.ethereum.usd_market_cap;
 s.others=s.total3-p.tether.usd_market_cap-p["usd-coin"].usd_market_cap;
 s.total3btc=s.total3/p.bitcoin.usd_market_cap;s.othersbtc=s.others/p.bitcoin.usd_market_cap;s.othersD=s.others/s.total*100;
 }catch(e){}
+lastMarket=s;
+
 let arr=[
 ["BTC.D","Цель 40–45%",s.btcD,pct,prog(s.btcD,goals.btcD,"range")],
 ["ETH/BTC","Цель 0.045+",s.ethbtc,v=>Number(v).toFixed(4),prog(s.ethbtc,goals.ethbtc,"higher")],
@@ -113,8 +129,9 @@ let arr=[
 ["ETH","Цель $7k",s.eth,money,prog(s.eth,goals.eth,"higher")],
 ["Altseason","Цель 75+",m.altszn,v=>v,prog(m.altszn,goals.altszn,"higher")]
 ].filter(x=>x[4]!==null).sort((a,b)=>b[4]-a[4]);
+
 metrics.innerHTML=arr.map(x=>{let c=color(x[4]);return `<div class="metric"><div class="mName">${x[0]}</div><div class="mGoal">${x[1]}</div><div class="mVal ${c}">${x[3](x[2])}</div><div class="mPct">${x[4]}%</div><div class="bar"><div class="fill ${c}" style="width:${x[4]}%"></div></div></div>`}).join("");
-let avg=Math.round(arr.reduce((a,b)=>a+b[4],0)/arr.length);
+let avg=arr.length?Math.round(arr.reduce((a,b)=>a+b[4],0)/arr.length):0;
 score.textContent=avg+"%";status.textContent=avg<40?"BTC-сезон":avg<65?"Ранний переход":avg<80?"Альтсезон близко":"Перегрев";
 conclusion.textContent=s.btcD>55?"BTC.D ещё высокая. Альты пока не в полноценной фазе.":"BTC.D снижается. Если ETH/BTC и OTHERS.D растут — рынок приближается к альтсезону.";
 }
@@ -143,18 +160,44 @@ localStorage.setItem("portfolioCompact",JSON.stringify(portfolio));
 if(!portfolio.length){coins.innerHTML="";portfolioTotal.textContent="$0";portfolioPnl.textContent="PnL: $0";return}
 let ids=[...new Set(portfolio.map(x=>x.id))].join(","),prices={};
 try{prices=await cg(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`)}catch(e){}
+lastPrices=prices;
 let total=0,invested=0,html="";
 portfolio.forEach((c,i)=>{
-let price=prices[c.id]?.usd||0,ch=prices[c.id]?.usd_24h_change||0,val=price*c.amount,inv=c.avg*c.amount,pnl=val-inv,pnlPct=inv?pnl/inv*100:0;
+let price=prices[c.id]?.usd||0,ch=prices[c.id]?.usd_24h_change||0,val=price*c.amount,inv=c.avg*c.amount,pnl=val-inv,pnlPct=inv?pnl/inv*100:0,targetProg=c.target&&price?clamp(price/c.target*100):null;
 total+=val;invested+=inv;
-html+=`<div class="coin" id="coin${i}"><div class="coinHead" onclick="coin${i}.classList.toggle('open')"><div><div class="coinSym">${c.symbol}</div><div class="coinName">${c.name}</div></div><div><div class="coinVal">${money(val)}</div><div class="coinPnl ${pnl>=0?'green':'red'}">${pnlPct.toFixed(1)}%</div></div></div><div class="details"><div class="boxGrid"><div class="box"><div class="lbl">Кол-во</div><div class="num">${c.amount}</div></div><div class="box"><div class="lbl">Цена</div><div class="num">${money(price)}</div></div><div class="box"><div class="lbl">Средняя</div><div class="num">${money(c.avg)}</div></div><div class="box"><div class="lbl">Цель</div><div class="num">${c.target?money(c.target):"—"}</div></div></div><button onclick="portfolio.splice(${i},1);localStorage.setItem('portfolioCompact',JSON.stringify(portfolio));renderPortfolio()">Удалить</button></div></div>`;
+html+=`<div class="coin" id="coin${i}"><div class="coinHead" onclick="coin${i}.classList.toggle('open')"><div><div class="coinSym">${c.symbol}</div><div class="coinName">${c.name}</div></div><div><div class="coinVal">${money(val)}</div><div class="coinPnl ${pnl>=0?'green':'red'}">${pnlPct.toFixed(1)}%</div></div></div><div class="details"><div class="boxGrid"><div class="box"><div class="lbl">Кол-во</div><div class="num">${c.amount}</div></div><div class="box"><div class="lbl">Цена</div><div class="num">${money(price)}</div></div><div class="box"><div class="lbl">Средняя</div><div class="num">${money(c.avg)}</div></div><div class="box"><div class="lbl">Цель</div><div class="num">${c.target?money(c.target):"—"}</div></div><div class="box"><div class="lbl">До цели</div><div class="num">${targetProg!==null?targetProg+"%":"—"}</div></div><div class="box"><div class="lbl">24ч</div><div class="num ${ch>=0?'green':'red'}">${ch.toFixed(1)}%</div></div></div><button onclick="portfolio.splice(${i},1);localStorage.setItem('portfolioCompact',JSON.stringify(portfolio));renderPortfolio();renderSignals()">Удалить</button></div></div>`;
 });
 let pnl=total-invested;portfolioTotal.textContent=money(total);portfolioPnl.innerHTML=`PnL: <span class="${pnl>=0?'green':'red'}">${money(pnl)}</span>`;coins.innerHTML=html;
 }
 
+function signal(title,text,status){
+let c=status==="Сработало"?"green":status==="Близко"?"yellow":"red";
+return `<div class="signal"><div class="sigTop"><div><div class="sigTitle">${title}</div><div class="sigText">${text}</div></div><div class="sigBadge ${c}">${status}</div></div></div>`;
+}
+
+function renderSignals(){
+let m=JSON.parse(localStorage.getItem("manualCompact")||"{}");
+let s=lastMarket;
+let html="";
+html+=signal("BTC.D ниже 55%",s.btcD?`Сейчас: ${pct(s.btcD)}`:"Нет данных",s.btcD&&s.btcD<55?"Сработало":s.btcD&&s.btcD<58?"Близко":"Ждём");
+html+=signal("ETH/BTC выше 0.040",s.ethbtc?`Сейчас: ${Number(s.ethbtc).toFixed(4)}`:"Нет данных",s.ethbtc&&s.ethbtc>0.04?"Сработало":s.ethbtc&&s.ethbtc>0.035?"Близко":"Ждём");
+html+=signal("OTHERS.D выше 17%",s.othersD?`Сейчас: ${pct(s.othersD)}`:"Нет данных",s.othersD&&s.othersD>17?"Сработало":s.othersD&&s.othersD>14?"Близко":"Ждём");
+html+=signal("Altseason Index выше 75",m.altszn?`Сейчас: ${m.altszn}`:"Введи вручную",Number(m.altszn)>=75?"Сработало":Number(m.altszn)>=60?"Близко":"Ждём");
+
+portfolio.forEach(c=>{
+let price=lastPrices[c.id]?.usd||0;
+if(c.target&&price){
+html+=signal(`${c.symbol} цель выхода`,`${money(price)} / ${money(c.target)}`,price>=c.target?"Сработало":price>=c.target*0.8?"Близко":"Ждём");
+}
+});
+signalList.innerHTML=html;
+}
+
 function saveKeys(){localStorage.setItem("cgKey",coingeckoKey.value);alert("Сохранено")}
-function saveManual(){localStorage.setItem("manualCompact",JSON.stringify({altszn:altszn.value}));alert("Сохранено");loadMarket()}
-loadMarket();renderPortfolio();
+function saveManual(){localStorage.setItem("manualCompact",JSON.stringify({altszn:altszn.value}));alert("Сохранено");refreshAll()}
+
+refreshAll();
+setInterval(refreshAll,300000);
 </script>
 </body>
 </html>
