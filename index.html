@@ -3,109 +3,355 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v6.6 FIX</title>
+<title>Altseason Terminal v6.6 Product</title>
+<meta name="theme-color" content="#070b14">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#070b14;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:12px 12px 90px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+--bg:#070b14;--card:#101827;--card2:#121b2d;--border:#22314a;--muted:#8e9bb1;
+--blue:#2f8cff;--red:#ff5c5c;--yellow:#ffc44d;--green:#37d67a;--hyper:#00ff95;
+}
+body{background:var(--bg);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;padding:12px 12px 95px}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-h1{font-size:25px;font-weight:900}
-.sub{font-size:13px;color:#8c98aa;margin-top:2px}
-.settings{width:42px;height:42px;border-radius:14px;background:#121b2d;border:1px solid #24324b;color:#cbd6e8;font-size:22px}
-.tabs{display:flex;gap:7px;margin-bottom:10px}
-.tab{flex:1;padding:10px 4px;border-radius:14px;background:#121b2d;color:#aeb8cb;text-align:center;font-size:14px;font-weight:800}
-.tab.active{background:#2f8cff;color:#fff}
+h1{font-size:24px;font-weight:950;letter-spacing:-.5px}
+.sub{font-size:12px;color:var(--muted);margin-top:2px}
+.iconBtn{width:42px;height:42px;border-radius:14px;background:var(--card2);border:1px solid #263750;display:flex;align-items:center;justify-content:center}
+.iconBtn svg{width:20px;height:20px;fill:#cbd6e8}
+.tabs{display:flex;gap:7px;margin-bottom:10px;position:sticky;top:0;z-index:20;background:linear-gradient(var(--bg) 75%,transparent);padding:6px 0}
+.tab{flex:1;padding:10px 4px;border-radius:14px;background:var(--card2);color:#aeb8cb;text-align:center;font-size:13px;font-weight:900}
+.tab.active{background:var(--blue);color:white}
+.section{display:none}.section.active{display:block}
 .hero{background:linear-gradient(135deg,#148ca7,#126733);border-radius:22px;padding:14px;margin-bottom:10px}
-.heroLabel{font-size:13px;color:#d9e7f2}
-.score{font-size:42px;font-weight:950;line-height:1;margin:4px 0}
-.phase{font-size:13px}
+.heroLabel{font-size:13px;color:#d9e7f2}.score{font-size:42px;font-weight:950;line-height:1;margin:4px 0}.phase{font-size:13px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.metric{background:#101827;border:1px solid #22314a;border-radius:17px;padding:10px}
-.mTop{display:flex;justify-content:space-between}
-.mName{font-size:15px;font-weight:900}
-.src{font-size:10px;color:#7d89a0;font-weight:800}
-.mVal{font-size:21px;font-weight:950;margin-top:6px}
-.mPct{font-size:12px;color:#9aa7bb}
-.bar{height:5px;background:#1d2b44;border-radius:99px;margin-top:7px;overflow:hidden}
-.fill{height:100%;border-radius:99px}
-.red{color:#ff5c5c}.yellow{color:#ffc44d}.green{color:#37d67a}
-.fill.red{background:#ff5c5c}.fill.yellow{background:#ffb020}.fill.green{background:#37d67a}
-.card{background:#101827;border:1px solid #22314a;border-radius:18px;padding:12px;margin-top:10px}
-.note{font-size:13px;line-height:1.45;color:#c6d0e3}
-button{width:100%;padding:12px;border:none;border-radius:15px;background:#2f8cff;color:white;font-size:15px;font-weight:900;margin-top:10px}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:10px;overflow:hidden}
+.metric.hiddenMetric{display:none}
+.metric.open .details{display:block}
+.mTop{display:flex;justify-content:space-between;gap:6px}
+.mName{font-size:14px;font-weight:950;line-height:1.05}.src{font-size:10px;color:#7d89a0;font-weight:900}
+.mVal{font-size:20px;font-weight:950;margin-top:6px}.mPct{font-size:12px;color:#9aa7bb;margin-top:1px}
+.bar{height:5px;background:#1d2b44;border-radius:99px;margin-top:7px;overflow:hidden}.fill{height:100%;border-radius:99px}
+.red{color:var(--red)}.yellow{color:var(--yellow)}.green{color:var(--green)}.hyper{color:var(--hyper)}.muted{color:var(--muted)}
+.fill.red{background:var(--red)}.fill.yellow{background:#ffb020}.fill.green{background:var(--green)}.fill.hyper{background:var(--hyper)}
+.details{display:none;margin-top:8px;padding-top:8px;border-top:1px solid #22314b}
+.detailText{font-size:12px;line-height:1.35;color:#c5d0e4}
+.tag{display:inline-block;margin-top:7px;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:950}
+.tag.red{background:#351d27;color:#ff7387}.tag.yellow{background:#3b3117;color:#ffd166}.tag.green{background:#173726;color:#4effa0}.tag.hyper{background:#083e2b;color:#00ff95}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:12px;margin-top:10px}
+.cardTitle{font-size:18px;font-weight:950;margin-bottom:10px}.note{font-size:13px;line-height:1.45;color:#c6d0e3}
+button{width:100%;padding:12px;border:none;border-radius:15px;background:var(--blue);color:#fff;font-size:15px;font-weight:950;margin-top:10px}
+button.secondary{background:#172235;border:1px solid #2b3c58}.danger{background:#3a1f29;color:#ff7082}
+input,select{width:100%;padding:12px;border:0;border-radius:14px;background:#182335;color:#fff;font-size:14px;margin-top:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #1e2b43;padding:10px 0}.row:last-child{border-bottom:0}
+.switch{width:44px;height:25px;border-radius:999px;background:#22324b;position:relative;flex:0 0 auto}
+.switch:after{content:"";position:absolute;width:19px;height:19px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.18s}.switch.active{background:var(--blue)}.switch.active:after{left:22px}
+.suggestions{border-radius:14px;overflow:hidden;max-height:205px;overflow-y:auto;margin-top:5px}.sug{padding:10px;border-bottom:1px solid #22314a;background:#121b2d;font-size:14px}.hidden{display:none!important}
+.coin{background:var(--card);border:1px solid var(--border);border-radius:17px;margin:8px 0;overflow:hidden}
+.coinHead{display:flex;justify-content:space-between;align-items:center;padding:11px}
+.coinSym{font-size:20px;font-weight:950}.coinName{font-size:12px;color:var(--muted)}
+.coinVal{text-align:right;font-size:17px;font-weight:950}.coinPnl{text-align:right;font-size:13px;font-weight:900}
+.coin.open .coinDetails{display:block}.coinDetails{display:none;border-top:1px solid #22314a;padding:10px}
+.boxGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.box{background:#172235;border-radius:12px;padding:9px}.lbl{font-size:11px;color:var(--muted)}.num{font-size:15px;font-weight:950;margin-top:3px}
+.signal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:10px;margin:8px 0}
+.sigTop{display:flex;justify-content:space-between;gap:8px}.sigTitle{font-weight:950;font-size:14px}.sigText{font-size:12px;color:var(--muted);margin-top:3px}.sigBadge{font-size:12px;font-weight:950}
+.proLock{background:linear-gradient(135deg,#221a36,#103521);border-color:#315f9b}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#1d2d44;color:#b8c7dd;font-size:11px;font-weight:950;margin:3px 4px 0 0}
+.small{font-size:12px;color:var(--muted);line-height:1.4;margin-top:8px}
 </style>
 </head>
 <body>
 
 <div class="top">
-<div>
-<h1>Altseason Terminal</h1>
-<div class="sub">V6.6 Foundation FIX</div>
-</div>
-<button class="settings">⚙</button>
-</div>
-
-<div class="tabs">
-<div class="tab active">Радар</div>
-<div class="tab">Сигналы</div>
-<div class="tab">Портфель</div>
+  <div>
+    <h1>Altseason Terminal</h1>
+    <div class="sub">v6.6 Product · Free foundation</div>
+  </div>
+  <div class="iconBtn" onclick="openTab('settings')">
+    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.028 7.028 0 0 0-1.63-.94l-.36-2.54A.488.488 0 0 0 13.9 2h-3.8a.488.488 0 0 0-.49.42l-.36 2.54c-.59.24-1.13.55-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.65-.06.94s.02.63.06.94L2.83 14.16a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.31.6.22l2.39-.96c.5.39 1.04.71 1.63.94l.36 2.54c.05.24.25.42.49.42h3.8c.24 0 .44-.18.49-.42l.36-2.54c.59-.24 1.13-.55 1.63-.94l2.39.96c.22.09.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z"/></svg>
+  </div>
 </div>
 
-<div class="hero">
-<div class="heroLabel">Готовность рынка</div>
-<div class="score">61%</div>
-<div class="phase">Переход к альтсезону</div>
+<div class="tabs" id="tabs">
+  <div class="tab active" onclick="openTab('radar',this)">Радар</div>
+  <div class="tab" onclick="openTab('signals',this)">Сигналы</div>
+  <div class="tab" onclick="openTab('portfolio',this)">Портфель</div>
 </div>
 
-<div class="grid">
+<section id="radar" class="section active">
+  <div class="hero">
+    <div class="heroLabel">Готовность рынка</div>
+    <div class="score" id="marketScore">...</div>
+    <div class="phase" id="marketPhase">Загрузка данных...</div>
+  </div>
 
-<div class="metric">
-<div class="mTop">
-<div class="mName">BTC.D</div>
-<div class="src">TV</div>
-</div>
-<div class="mVal red">58.2%</div>
-<div class="mPct">41%</div>
-<div class="bar"><div class="fill red" style="width:41%"></div></div>
-</div>
+  <div class="grid" id="metricsGrid"></div>
 
-<div class="metric">
-<div class="mTop">
-<div class="mName">ETH/BTC</div>
-<div class="src">TV</div>
-</div>
-<div class="mVal yellow">0.028</div>
-<div class="mPct">62%</div>
-<div class="bar"><div class="fill yellow" style="width:62%"></div></div>
-</div>
+  <div class="card">
+    <div class="cardTitle">Вывод</div>
+    <div class="note" id="conclusion">Загружаю метрики...</div>
+    <button onclick="refreshAll()">Обновить данные</button>
+    <div class="small" id="updatedAt"></div>
+  </div>
+</section>
 
-<div class="metric">
-<div class="mTop">
-<div class="mName">OTHERS.D</div>
-<div class="src">TV</div>
-</div>
-<div class="mVal red">13.1%</div>
-<div class="mPct">35%</div>
-<div class="bar"><div class="fill red" style="width:35%"></div></div>
-</div>
+<section id="signals" class="section">
+  <div class="card">
+    <div class="cardTitle">Сигналы</div>
+    <div id="signalList">Загрузка...</div>
+    <button onclick="refreshAll()">Проверить сейчас</button>
+  </div>
+</section>
 
-<div class="metric">
-<div class="mTop">
-<div class="mName">ETH.D</div>
-<div class="src">TV</div>
-</div>
-<div class="mVal yellow">10.4%</div>
-<div class="mPct">52%</div>
-<div class="bar"><div class="fill yellow" style="width:52%"></div></div>
-</div>
+<section id="portfolio" class="section">
+  <div class="card">
+    <div class="cardTitle">Добавить монету</div>
+    <input id="coinInput" placeholder="BTC, ETH, SOL, SUI">
+    <div id="suggestions" class="suggestions hidden"></div>
+    <input id="amountInput" type="number" step="any" placeholder="Количество">
+    <input id="avgInput" type="number" step="any" placeholder="Средняя покупка $">
+    <input id="targetInput" type="number" step="any" placeholder="Цель выхода $">
+    <button onclick="addCoin()">Добавить</button>
+  </div>
+  <div class="hero">
+    <div class="heroLabel">Портфель</div>
+    <div class="score" id="portfolioTotal">$0</div>
+    <div class="phase" id="portfolioPnl">PnL: $0</div>
+  </div>
+  <div id="coins"></div>
+</section>
 
-</div>
+<section id="settings" class="section">
+  <div class="card">
+    <div class="cardTitle">Настройки метрик</div>
+    <div id="metricToggles"></div>
+  </div>
 
-<div class="card">
-<div class="note">
-BTC.D всё ещё высокая, а OTHERS.D остаётся слабой. Сейчас рынок больше похож на ранний переход к altseason.
-</div>
-<button>Обновить данные</button>
-</div>
+  <div class="card proLock">
+    <div class="cardTitle">PRO-функции, подготовлено</div>
+    <div class="note">Сейчас заблокировано, но архитектура уже заложена:</div>
+    <div>
+      <span class="pill">Добавить свою метрику</span>
+      <span class="pill">Свои API-ключи</span>
+      <span class="pill">Светлая тема</span>
+      <span class="pill">Push-сигналы</span>
+      <span class="pill">AI-анализ</span>
+    </div>
+    <button class="secondary" onclick="alert('PRO пока не активирован. Это задел под будущую платную версию.')">Добавить свою метрику · PRO</button>
+  </div>
 
+  <div class="card">
+    <div class="cardTitle">API</div>
+    <input id="coingeckoKey" placeholder="CoinGecko API Key, если есть">
+    <input id="altseasonManual" type="number" placeholder="Altseason Index CoinGlass, если вводишь вручную">
+    <button onclick="saveSettings()">Сохранить настройки</button>
+    <div class="small">Ключи хранятся только на этом телефоне. Для публичной версии ключи лучше держать на сервере.</div>
+  </div>
+</section>
+
+<script>
+const metricDefs=[
+ {id:"btcD",name:"BTC.D",source:"CG",goal:"40–45%",why:"Чем ниже BTC dominance, тем больше шанс перетока денег в альты.",type:"btcD",auto:true},
+ {id:"ethbtc",name:"ETH/BTC",source:"CG",goal:"0.045–0.050",why:"Показывает силу ETH относительно BTC.",type:"higher",target:0.045,auto:true},
+ {id:"othersbtc",name:"OTHERS/BTC",source:"CG",goal:"0.5+",why:"Сила рынка альтов без BTC и ETH относительно BTC.",type:"higher",target:0.5,auto:true},
+ {id:"total3btc",name:"TOTAL3/BTC",source:"CG",goal:"0.85+",why:"Широкий рынок альтов относительно BTC.",type:"higher",target:0.85,auto:true},
+ {id:"othersD",name:"OTHERS.D",source:"CG",goal:"17–22%",why:"Главный индикатор силы широкого рынка альтов.",type:"othersD",auto:true},
+ {id:"btc",name:"BTC",source:"CG",goal:"$150k+",why:"Целевой ориентир цены BTC для текущего bullrun.",type:"higher",target:150000,auto:true,format:"money"},
+ {id:"eth",name:"ETH",source:"CG",goal:"$7k+",why:"Целевой ориентир цены ETH для текущего bullrun.",type:"higher",target:7000,auto:true,format:"money"},
+ {id:"ethD",name:"ETH.D",source:"CG",goal:"20%+",why:"Доминация ETH как лидера альтов.",type:"higher",target:20,auto:true,format:"pct"},
+ {id:"altseason",name:"Altseason",source:"CGI",goal:"75+",why:"CoinGlass Altseason Index. Пока можно вводить вручную.",type:"higher",target:75,auto:false}
+];
+
+const direct=[
+ {id:"bitcoin",symbol:"BTC",name:"Bitcoin"},{id:"ethereum",symbol:"ETH",name:"Ethereum"},
+ {id:"solana",symbol:"SOL",name:"Solana"},{id:"sui",symbol:"SUI",name:"Sui"},
+ {id:"pepe",symbol:"PEPE",name:"Pepe"},{id:"aptos",symbol:"APT",name:"Aptos"},
+ {id:"litecoin",symbol:"LTC",name:"Litecoin"},{id:"internet-computer",symbol:"ICP",name:"Internet Computer"},
+ {id:"dogecoin",symbol:"DOGE",name:"Dogecoin"},{id:"cardano",symbol:"ADA",name:"Cardano"},
+ {id:"avalanche-2",symbol:"AVAX",name:"Avalanche"},{id:"chainlink",symbol:"LINK",name:"Chainlink"},
+ {id:"near",symbol:"NEAR",name:"NEAR Protocol"},{id:"polkadot",symbol:"DOT",name:"Polkadot"}
+];
+
+const map={btc:"bitcoin",bitcoin:"bitcoin",eth:"ethereum",ethereum:"ethereum",sol:"solana",solana:"solana",sui:"sui",pepe:"pepe",apt:"aptos",ltc:"litecoin",icp:"internet-computer",doge:"dogecoin",ada:"cardano",avax:"avalanche-2",link:"chainlink",near:"near",dot:"polkadot"};
+
+let selected=null, market={}, pricesCache={};
+let portfolio=JSON.parse(localStorage.getItem("as_portfolio")||"[]");
+let enabled=JSON.parse(localStorage.getItem("as_enabled")||"{}");
+metricDefs.forEach(m=>{if(enabled[m.id]===undefined)enabled[m.id]=true});
+
+function openTab(id,el){
+ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+ if(el)el.classList.add("active");
+ if(id==="settings")renderSettings();
+ if(id==="signals")renderSignals();
+ if(id==="portfolio")renderPortfolio();
+}
+function money(n){return "$"+Number(n||0).toLocaleString("en-US",{maximumFractionDigits:2})}
+function pct(n){return Number(n||0).toFixed(2)+"%"}
+function clamp(n){return Math.max(0,Math.min(100,Math.round(n||0)))}
+function color(score,status){ if(status==="hyper")return "hyper"; return score>=80?"green":score>=55?"yellow":"red"; }
+function calcStatus(def,value){
+ value=Number(value);
+ if(!isFinite(value)||value===0)return {score:null,label:"нет данных",className:"muted"};
+ if(def.type==="btcD"){
+   if(value<40)return {score:100,label:"Перегрев альтов",className:"hyper"};
+   if(value>=40&&value<=45)return {score:100,label:"Altseason zone",className:"green"};
+   if(value>45&&value<=58)return {score:clamp(100-((value-45)/(58-45))*45),label:"Переход",className:"yellow"};
+   return {score:clamp(40-(value-58)*3),label:"BTC season",className:"red"};
+ }
+ if(def.type==="othersD"){
+   if(value>=22)return {score:100,label:"Перегрев",className:"hyper"};
+   if(value>=17&&value<=22)return {score:100,label:"Altseason zone",className:"green"};
+   if(value>=14&&value<17)return {score:clamp(55+(value-14)/(3)*25),label:"Близко",className:"yellow"};
+   return {score:clamp(value/14*50),label:"Далеко",className:"red"};
+ }
+ if(def.type==="higher"){
+   let s=clamp(value/def.target*100);
+   let cls=s>=100?"green":s>=70?"yellow":"red";
+   let label=s>=100?"Достигнуто":s>=70?"Близко":"Ждём";
+   if(s>130){cls="hyper";label="Перегрев";}
+   return {score:s,label,className:cls};
+ }
+ return {score:null,label:"нет данных",className:"muted"};
+}
+function formatVal(def,val){
+ if(val===undefined||val===null||!isFinite(Number(val)))return "—";
+ if(def.format==="money")return money(val);
+ if(def.format==="pct")return pct(val);
+ if(def.id==="ethbtc")return Number(val).toFixed(4);
+ if(def.id==="othersbtc"||def.id==="total3btc")return Number(val).toFixed(3);
+ if(def.id==="btcD"||def.id==="othersD"||def.id==="ethD")return pct(val);
+ return String(val);
+}
+async function cg(url){
+ const key=localStorage.getItem("as_cg_key")||"";
+ const headers=key?{"x-cg-demo-api-key":key}:{};
+ const r=await fetch(url,{headers});
+ if(!r.ok)throw new Error("CoinGecko error");
+ return r.json();
+}
+async function refreshAll(){
+ await loadMarket();
+ await renderPortfolio();
+ renderSignals();
+}
+async function loadMarket(){
+ try{
+  const g=await cg("https://api.coingecko.com/api/v3/global");
+  const mp=g.data.market_cap_percentage;
+  const p=await cg("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,usd-coin&vs_currencies=usd,btc&include_market_cap=true");
+  const total=g.data.total_market_cap.usd;
+  const btcM=p.bitcoin.usd_market_cap, ethM=p.ethereum.usd_market_cap, usdtM=p.tether.usd_market_cap, usdcM=p["usd-coin"].usd_market_cap;
+  const total3=total-btcM-ethM, others=total3-usdtM-usdcM;
+  market={
+   btcD:mp.btc, ethD:mp.eth, btc:p.bitcoin.usd, eth:p.ethereum.usd, ethbtc:p.ethereum.btc,
+   total3btc:total3/btcM, othersbtc:others/btcM, othersD:others/total*100,
+   altseason:Number(localStorage.getItem("as_altseason")||0)
+  };
+ }catch(e){
+  console.log(e);
+ }
+ renderMetrics();
+}
+function renderMetrics(){
+ const active=metricDefs.filter(m=>enabled[m.id]);
+ let scored=[];
+ const html=active.map(def=>{
+   const val=market[def.id];
+   const st=calcStatus(def,val);
+   if(st.score!==null)scored.push(st.score);
+   const c=st.className==="muted"?"red":st.className;
+   return `<div class="metric" onclick="this.classList.toggle('open')">
+    <div class="mTop"><div class="mName">${def.name}</div><div class="src">${def.source}</div></div>
+    <div class="mVal ${c}">${formatVal(def,val)}</div>
+    <div class="mPct">${st.score===null?"нет данных":st.score+"%"}</div>
+    <div class="bar"><div class="fill ${c}" style="width:${st.score||0}%"></div></div>
+    <div class="details"><div class="detailText">Цель: ${def.goal}<br>${def.why}</div><span class="tag ${c}">${st.label}</span></div>
+   </div>`;
+ }).join("");
+ metricsGrid.innerHTML=html;
+ const avg=scored.length?Math.round(scored.reduce((a,b)=>a+b,0)/scored.length):0;
+ marketScore.textContent=avg+"%";
+ marketPhase.textContent=avg<40?"BTC-сезон":avg<65?"Ранний переход":avg<80?"Альтсезон близко":"Перегрев / поздняя фаза";
+ conclusion.textContent = (market.btcD&&market.btcD>55)
+  ? "BTC.D ещё высокая, а OTHERS.D пока должна быть красной, если ниже 14–17%. Полноценный altseason ещё не подтверждён."
+  : "BTC.D снижается. Если ETH/BTC и OTHERS.D продолжают расти, рынок приближается к altseason.";
+ updatedAt.textContent="Обновлено: "+new Date().toLocaleTimeString();
+}
+function renderSettings(){
+ metricToggles.innerHTML=metricDefs.map(m=>`<div class="row"><div><div style="font-weight:900;font-size:14px">${m.name}</div><div class="small">${m.goal} · ${m.source}</div></div><div class="switch ${enabled[m.id]?'active':''}" onclick="toggleMetric('${m.id}',this)"></div></div>`).join("");
+ coingeckoKey.value=localStorage.getItem("as_cg_key")||"";
+ altseasonManual.value=localStorage.getItem("as_altseason")||"";
+}
+function toggleMetric(id,el){enabled[id]=!enabled[id];localStorage.setItem("as_enabled",JSON.stringify(enabled));el.classList.toggle("active");renderMetrics()}
+function saveSettings(){
+ localStorage.setItem("as_cg_key",coingeckoKey.value.trim());
+ localStorage.setItem("as_altseason",altseasonManual.value.trim());
+ refreshAll();
+ alert("Настройки сохранены");
+}
+function signal(title,text,state){
+ const c=state==="Сработало"?"green":state==="Близко"?"yellow":"red";
+ return `<div class="signal"><div class="sigTop"><div><div class="sigTitle">${title}</div><div class="sigText">${text}</div></div><div class="sigBadge ${c}">${state}</div></div></div>`;
+}
+function renderSignals(){
+ let html="";
+ html+=signal("BTC.D ниже 55%",market.btcD?`Сейчас: ${pct(market.btcD)}`:"Нет данных",market.btcD&&market.btcD<55?"Сработало":market.btcD&&market.btcD<58?"Близко":"Ждём");
+ html+=signal("ETH/BTC выше 0.040",market.ethbtc?`Сейчас: ${Number(market.ethbtc).toFixed(4)}`:"Нет данных",market.ethbtc&&market.ethbtc>0.04?"Сработало":market.ethbtc&&market.ethbtc>0.035?"Близко":"Ждём");
+ html+=signal("OTHERS.D выше 17%",market.othersD?`Сейчас: ${pct(market.othersD)}`:"Нет данных",market.othersD&&market.othersD>17?"Сработало":market.othersD&&market.othersD>14?"Близко":"Ждём");
+ html+=signal("Altseason Index выше 75",market.altseason?`Сейчас: ${market.altseason}`:"Введи в настройках",market.altseason>=75?"Сработало":market.altseason>=60?"Близко":"Ждём");
+ portfolio.forEach(c=>{
+   const price=pricesCache[c.id]?.usd||0;
+   if(c.target&&price) html+=signal(`${c.symbol} цель выхода`,`${money(price)} / ${money(c.target)}`,price>=c.target?"Сработало":price>=c.target*0.8?"Близко":"Ждём");
+ });
+ signalList.innerHTML=html;
+}
+function resolveCoin(text){
+ let q=String(text||"").toLowerCase().trim();
+ let id=map[q]||q;
+ return direct.find(c=>c.id===id||c.symbol.toLowerCase()===q||c.name.toLowerCase()===q)||{id,symbol:q.toUpperCase(),name:text};
+}
+coinInput.addEventListener("input",()=>{
+ const q=coinInput.value.toLowerCase().trim();
+ if(!q){suggestions.classList.add("hidden");return}
+ const res=direct.filter(c=>c.symbol.toLowerCase().startsWith(q)||c.name.toLowerCase().startsWith(q)).slice(0,8);
+ suggestions.innerHTML=res.map(c=>`<div class="sug" onclick="selectCoin('${c.id}','${c.symbol}','${c.name}')"><b>${c.symbol}</b> — ${c.name}</div>`).join("");
+ suggestions.classList.toggle("hidden",!res.length);
+});
+function selectCoin(id,symbol,name){selected={id,symbol,name};coinInput.value=symbol+" — "+name;suggestions.classList.add("hidden")}
+function addCoin(){
+ if(!selected)selected=resolveCoin(coinInput.value);
+ const amount=Number(amountInput.value), avg=Number(avgInput.value), target=Number(targetInput.value);
+ if(!amount||!avg)return alert("Заполни количество и среднюю цену");
+ portfolio.push({...selected,amount,avg,target});
+ localStorage.setItem("as_portfolio",JSON.stringify(portfolio));
+ coinInput.value=amountInput.value=avgInput.value=targetInput.value="";
+ selected=null; renderPortfolio();
+}
+async function renderPortfolio(){
+ portfolio=portfolio.map(c=>c.id?c:{...resolveCoin(c.coin||c.symbol),amount:Number(c.amount),avg:Number(c.avg),target:Number(c.target||0)});
+ localStorage.setItem("as_portfolio",JSON.stringify(portfolio));
+ if(!portfolio.length){coins.innerHTML='<div class="card"><div class="note">Портфель пока пуст.</div></div>';portfolioTotal.textContent="$0";portfolioPnl.textContent="PnL: $0";return}
+ const ids=[...new Set(portfolio.map(x=>x.id))].join(",");
+ try{pricesCache=await cg(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`)}catch(e){pricesCache={}}
+ let total=0, invested=0, html="";
+ portfolio.forEach((c,i)=>{
+   const price=pricesCache[c.id]?.usd||0, ch=pricesCache[c.id]?.usd_24h_change||0;
+   const val=price*c.amount, inv=c.avg*c.amount, pnl=val-inv, pnlPct=inv?pnl/inv*100:0, targetProg=c.target&&price?clamp(price/c.target*100):null;
+   total+=val; invested+=inv;
+   html+=`<div class="coin" id="coin${i}"><div class="coinHead" onclick="document.getElementById('coin${i}').classList.toggle('open')"><div><div class="coinSym">${c.symbol}</div><div class="coinName">${c.name}</div></div><div><div class="coinVal">${money(val)}</div><div class="coinPnl ${pnl>=0?'green':'red'}">${pnlPct.toFixed(1)}%</div></div></div><div class="coinDetails"><div class="boxGrid"><div class="box"><div class="lbl">Кол-во</div><div class="num">${c.amount}</div></div><div class="box"><div class="lbl">Цена</div><div class="num">${money(price)}</div></div><div class="box"><div class="lbl">Средняя</div><div class="num">${money(c.avg)}</div></div><div class="box"><div class="lbl">Цель</div><div class="num">${c.target?money(c.target):"—"}</div></div><div class="box"><div class="lbl">До цели</div><div class="num">${targetProg!==null?targetProg+"%":"—"}</div></div><div class="box"><div class="lbl">24ч</div><div class="num ${ch>=0?'green':'red'}">${ch.toFixed(1)}%</div></div></div><button class="danger" onclick="deleteCoin(${i})">Удалить</button></div></div>`;
+ });
+ const pnl=total-invested;
+ portfolioTotal.textContent=money(total);
+ portfolioPnl.innerHTML=`PnL: <span class="${pnl>=0?'green':'red'}">${money(pnl)}</span>`;
+ coins.innerHTML=html;
+}
+function deleteCoin(i){portfolio.splice(i,1);localStorage.setItem("as_portfolio",JSON.stringify(portfolio));renderPortfolio();renderSignals()}
+let startY=0;
+window.addEventListener("touchstart",e=>{if(window.scrollY===0)startY=e.touches[0].clientY},{passive:true});
+window.addEventListener("touchend",e=>{let end=e.changedTouches[0].clientY;if(window.scrollY===0&&end-startY>85)refreshAll()},{passive:true});
+refreshAll();
+setInterval(refreshAll,300000);
+</script>
 </body>
 </html>
