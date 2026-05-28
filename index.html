@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v6.6 Product</title>
+<title>Altseason Terminal v6.6.1 Product</title>
 <meta name="theme-color" content="#070b14">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -63,7 +63,7 @@ input,select{width:100%;padding:12px;border:0;border-radius:14px;background:#182
 <div class="top">
   <div>
     <h1>Altseason Terminal</h1>
-    <div class="sub">v6.6 Product · Free foundation</div>
+    <div class="sub">v6.6.1 Product · OTHERS.D fix</div>
   </div>
   <div class="iconBtn" onclick="openTab('settings')">
     <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.028 7.028 0 0 0-1.63-.94l-.36-2.54A.488.488 0 0 0 13.9 2h-3.8a.488.488 0 0 0-.49.42l-.36 2.54c-.59.24-1.13.55-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.65-.06.94s.02.63.06.94L2.83 14.16a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.31.6.22l2.39-.96c.5.39 1.04.71 1.63.94l.36 2.54c.05.24.25.42.49.42h3.8c.24 0 .44-.18.49-.42l.36-2.54c.59-.24 1.13-.55 1.63-.94l2.39.96c.22.09.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z"/></svg>
@@ -141,6 +141,7 @@ input,select{width:100%;padding:12px;border:0;border-radius:14px;background:#182
   <div class="card">
     <div class="cardTitle">API</div>
     <input id="coingeckoKey" placeholder="CoinGecko API Key, если есть">
+    <input id="othersDManual" type="number" step="any" placeholder="OTHERS.D TradingView, например 13.2">
     <input id="altseasonManual" type="number" placeholder="Altseason Index CoinGlass, если вводишь вручную">
     <button onclick="saveSettings()">Сохранить настройки</button>
     <div class="small">Ключи хранятся только на этом телефоне. Для публичной версии ключи лучше держать на сервере.</div>
@@ -153,7 +154,7 @@ const metricDefs=[
  {id:"ethbtc",name:"ETH/BTC",source:"CG",goal:"0.045–0.050",why:"Показывает силу ETH относительно BTC.",type:"higher",target:0.045,auto:true},
  {id:"othersbtc",name:"OTHERS/BTC",source:"CG",goal:"0.5+",why:"Сила рынка альтов без BTC и ETH относительно BTC.",type:"higher",target:0.5,auto:true},
  {id:"total3btc",name:"TOTAL3/BTC",source:"CG",goal:"0.85+",why:"Широкий рынок альтов относительно BTC.",type:"higher",target:0.85,auto:true},
- {id:"othersD",name:"OTHERS.D",source:"CG",goal:"17–22%",why:"Главный индикатор силы широкого рынка альтов.",type:"othersD",auto:true},
+ {id:"othersD",name:"OTHERS.D",source:"TV",goal:"17–22%",why:"TradingView OTHERS.D = доля рынка без топ-10 монет. Не считаем из CoinGecko формулой, чтобы не было ложного зелёного сигнала.",type:"othersD",auto:false},
  {id:"btc",name:"BTC",source:"CG",goal:"$150k+",why:"Целевой ориентир цены BTC для текущего bullrun.",type:"higher",target:150000,auto:true,format:"money"},
  {id:"eth",name:"ETH",source:"CG",goal:"$7k+",why:"Целевой ориентир цены ETH для текущего bullrun.",type:"higher",target:7000,auto:true,format:"money"},
  {id:"ethD",name:"ETH.D",source:"CG",goal:"20%+",why:"Доминация ETH как лидера альтов.",type:"higher",target:20,auto:true,format:"pct"},
@@ -245,7 +246,8 @@ async function loadMarket(){
   const total3=total-btcM-ethM, others=total3-usdtM-usdcM;
   market={
    btcD:mp.btc, ethD:mp.eth, btc:p.bitcoin.usd, eth:p.ethereum.usd, ethbtc:p.ethereum.btc,
-   total3btc:total3/btcM, othersbtc:others/btcM, othersD:others/total*100,
+   total3btc:total3/btcM, othersbtc:others/btcM,
+   othersD:Number(localStorage.getItem("as_othersD")||0),
    altseason:Number(localStorage.getItem("as_altseason")||0)
   };
  }catch(e){
@@ -281,11 +283,13 @@ function renderMetrics(){
 function renderSettings(){
  metricToggles.innerHTML=metricDefs.map(m=>`<div class="row"><div><div style="font-weight:900;font-size:14px">${m.name}</div><div class="small">${m.goal} · ${m.source}</div></div><div class="switch ${enabled[m.id]?'active':''}" onclick="toggleMetric('${m.id}',this)"></div></div>`).join("");
  coingeckoKey.value=localStorage.getItem("as_cg_key")||"";
+ othersDManual.value=localStorage.getItem("as_othersD")||"";
  altseasonManual.value=localStorage.getItem("as_altseason")||"";
 }
 function toggleMetric(id,el){enabled[id]=!enabled[id];localStorage.setItem("as_enabled",JSON.stringify(enabled));el.classList.toggle("active");renderMetrics()}
 function saveSettings(){
  localStorage.setItem("as_cg_key",coingeckoKey.value.trim());
+ localStorage.setItem("as_othersD",othersDManual.value.trim());
  localStorage.setItem("as_altseason",altseasonManual.value.trim());
  refreshAll();
  alert("Настройки сохранены");

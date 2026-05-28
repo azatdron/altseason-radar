@@ -1,13 +1,16 @@
-Altseason Terminal v6.6 Product
+Altseason Terminal v6.6.1 Product — OTHERS.D FIX
 
-Внутри:
-- index.html — готовый файл для GitHub Pages
-- index_for_copy.txt — тот же код, но как текст для удобного копирования с iPhone
+Что исправлено:
+- OTHERS.D больше НЕ считается неправильной формулой через CoinGecko.
+- OTHERS.D теперь источник TV/manual.
+- Если значение OTHERS.D не введено вручную в настройках, карточка показывает "нет данных", а не зелёный 100%.
+- В настройках добавлено поле: OTHERS.D TradingView.
 
 Как использовать:
 1. Распакуй ZIP.
-2. Если хочешь загрузить файлом — загрузи index.html в GitHub.
-3. Если хочешь копировать код — открой index_for_copy.txt, выбери всё, скопируй.
-4. В GitHub открой index.html → Edit → удали старый код → вставь новый → Commit changes.
+2. Загрузи index.html в GitHub или открой index_for_copy.txt и скопируй код вручную.
+3. В приложении открой настройки.
+4. В поле OTHERS.D TradingView введи реальное значение с TradingView CRYPTOCAP:OTHERS.D.
+5. Сохрани настройки.
 
-Это не финансовый совет. Приложение показывает метрики и сигналы для наблюдения.
+Это временное честное решение до подключения прямого TradingView-источника.
