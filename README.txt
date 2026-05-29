@@ -1,2 +1,2 @@
-Altseason Terminal v6.8.1 Exact Visual Fix
-Три колонки метрик на iPhone, круговой индикатор не скрывается, компактный верхний блок, Safe Area для Dynamic Island.
+Altseason Terminal v6.8.2 One Screen
+Максимально компактная версия под один экран iPhone: 3 колонки, маленький верх, компактные карточки, fallback данные если API не загрузился.
