@@ -1,2 +1,2 @@
-Altseason Terminal v6.7.1 FIX
-Стабильная версия: метрики на главном экране, цели на карточках, блок BTC → ALT → EXIT ниже метрик, safe-area для iPhone.
+Altseason Terminal v6.8 Visual Pro
+Новый дизайн как на концепте: safe area, круговой индикатор, карточки 3/2 колонки, источники данных, BTC → ALT → EXIT.
