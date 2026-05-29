@@ -1,2 +1,2 @@
-Altseason Terminal v6.7 Cycle Radar
-Добавлен блок BTC → ALT → EXIT, цели на карточках, Fear & Greed, Altseason Index, OTHERS.D manual/TV.
+Altseason Terminal v6.7.1 FIX
+Стабильная версия: метрики на главном экране, цели на карточках, блок BTC → ALT → EXIT ниже метрик, safe-area для iPhone.
