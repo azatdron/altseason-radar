@@ -1,2 +1,2 @@
-Altseason Terminal v6.8.4 Strategy Icons
-Добавлены значки в блок BTC → ALT → EXIT: Bitcoin, рост альтов, красная дверь выхода.
+Altseason Terminal v6.8.5 Strategy Icons
+SVG-иконки: Bitcoin, ALT rotation, clean red exit door. Без emoji.
