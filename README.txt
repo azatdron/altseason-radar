@@ -1,2 +1,2 @@
-Altseason Terminal v6.8 Visual Pro
-Новый дизайн как на концепте: safe area, круговой индикатор, карточки 3/2 колонки, источники данных, BTC → ALT → EXIT.
+Altseason Terminal v6.8.1 Exact Visual Fix
+Три колонки метрик на iPhone, круговой индикатор не скрывается, компактный верхний блок, Safe Area для Dynamic Island.
