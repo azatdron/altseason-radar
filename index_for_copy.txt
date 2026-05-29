@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v6.8.3 Compact Sources</title>
+<title>Altseason Terminal v6.8.4 Strategy Icons</title>
 <meta name="theme-color" content="#050913">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -30,18 +30,24 @@ h1{font-size:18px;font-weight:950;letter-spacing:-.7px;line-height:1}.sub{font-s
 button{width:100%;padding:10px;border:0;border-radius:13px;background:var(--blue);color:white;font-size:13px;font-weight:950;margin-top:8px}
 input{width:100%;padding:10px;border:0;border-radius:12px;background:#182335;color:white;font-size:12px;margin-top:7px}
 .row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b43;padding:8px 0}.row:last-child{border-bottom:0}.switch{width:40px;height:23px;border-radius:999px;background:#22324b;position:relative;flex:0 0 auto}.switch:after{content:"";position:absolute;width:17px;height:17px;border-radius:50%;background:white;top:3px;left:3px}.switch.active{background:var(--blue)}.switch.active:after{left:20px}
-.signal,.coin{background:#101827;border:1px solid var(--line);border-radius:14px;padding:8px;margin:6px 0}.sigTop,.coinTop{display:flex;justify-content:space-between;gap:8px}.pill{display:inline-block;padding:4px 7px;border-radius:999px;background:#1d2d44;color:#b8c7dd;font-size:9px;font-weight:950;margin:3px 4px 0 0}.suggestions{border-radius:14px;overflow:hidden;margin-top:5px}.sug{padding:9px;background:#121b2d;border-bottom:1px solid #22314a}.miniMetric{min-height:82px}.miniBody.compact{font-size:8.3px;color:#c6d0e3;line-height:1.18;margin-top:6px}.smallRadio{font-size:22px;color:#4bf187;margin-top:4px;line-height:1}.hidden{display:none!important}
+.signal,.coin{background:#101827;border:1px solid var(--line);border-radius:14px;padding:8px;margin:6px 0}.sigTop,.coinTop{display:flex;justify-content:space-between;gap:8px}.pill{display:inline-block;padding:4px 7px;border-radius:999px;background:#1d2d44;color:#b8c7dd;font-size:9px;font-weight:950;margin:3px 4px 0 0}.suggestions{border-radius:14px;overflow:hidden;margin-top:5px}.sug{padding:9px;background:#121b2d;border-bottom:1px solid #22314a}.miniMetric{min-height:82px}.miniBody.compact{font-size:8.3px;color:#c6d0e3;line-height:1.18;margin-top:6px}.smallRadio{font-size:22px;color:#4bf187;margin-top:4px;line-height:1}
+.phaseHead{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.phaseIcon{font-size:18px;line-height:1}
+.phaseIcon.btc{color:#ffbd32}
+.phaseIcon.alt{color:#39d982}
+.phaseIcon.exit{color:#ff5c67}
+.hidden{display:none!important}
 @media(max-width:390px){body{padding-left:6px;padding-right:6px}.metric{padding:6px;min-height:78px}.mName{font-size:9.6px}.mVal{font-size:13.5px}.goal,.mStatus{font-size:7.8px}.hero{min-height:90px;padding:7px;gap:5px}.donut{width:58px;height:58px}.score{font-size:27px}.tabs .tab{font-size:11px}}
 </style>
 </head>
 <body>
-<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v6.8.3 Compact Sources</span> · Live BTC → ALT → EXIT</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
+<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v6.8.4 Strategy Icons</span> · Live BTC → ALT → EXIT</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
 <div class="tabs"><div class="tab active" onclick="openTab('radar',this)">Радар</div><div class="tab" onclick="openTab('signals',this)">Сигналы</div><div class="tab" onclick="openTab('portfolio',this)">Портфель</div></div>
 <section id="radar" class="section active">
  <div class="hero"><div><div class="heroLabel">Готовность рынка</div><div class="score" id="marketScore">...</div><div class="phase" id="marketPhase">Загрузка...</div><div class="bar"><div id="heroBar" class="fill yellow"></div></div></div><div><div class="phaseTitle">Фаза рынка</div><div class="phaseMain" id="phaseMain">Загрузка...</div><div class="phaseSub">BTC → ALT</div></div><div class="donut" id="donut"><div class="donutText"><span id="donutScore">...</span><span>совпадение<br>индикаторов</span></div></div></div>
  <div class="grid" id="metricsGrid"></div>
  
- <div class="strategy"><div class="strategyTop"><div class="strategyTitle">BTC → ALT → EXIT</div><div class="what">ⓘ</div></div><div class="phaseGrid"><div class="phaseBox"><div class="phaseLabel">BTC</div><div class="phasePct yellow" id="btcPhase">...</div><div class="phaseBar"><div class="fill yellow" id="btcPhaseBar"></div></div><div class="phaseHint">Накопление BTC</div></div><div class="phaseBox"><div class="phaseLabel">ALT</div><div class="phasePct green" id="altPhase">...</div><div class="phaseBar"><div class="fill green" id="altPhaseBar"></div></div><div class="phaseHint">Ротация в альты</div></div><div class="phaseBox"><div class="phaseLabel">EXIT</div><div class="phasePct red" id="exitPhase">...</div><div class="phaseBar"><div class="fill red" id="exitPhaseBar"></div></div><div class="phaseHint">Фиксация</div></div></div><div class="flow"><div><b class="yellow">Покупка BTC</b><br>BTC.D&gt;58%</div><div class="arrow">➡</div><div><b class="green">Переход</b><br>BTC.D 45–50%</div><div class="arrow">➡</div><div><b class="red">Выход</b><br>F&G&gt;80</div></div></div>
+ <div class="strategy"><div class="strategyTop"><div class="strategyTitle">BTC → ALT → EXIT</div><div class="what">ⓘ Что это?</div></div><div class="phaseGrid"><div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">BTC-фаза</div><div class="phaseIcon btc">₿</div></div><div class="phasePct yellow" id="btcPhase">...</div><div class="phaseBar"><div class="fill yellow" id="btcPhaseBar"></div></div><div class="phaseHint">Накопление BTC<br>высокая доминация</div></div><div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">ALT-фаза</div><div class="phaseIcon alt">↗</div></div><div class="phasePct green" id="altPhase">...</div><div class="phaseBar"><div class="fill green" id="altPhaseBar"></div></div><div class="phaseHint">Ротация в альты<br>капитал переходит</div></div><div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">EXIT-фаза</div><div class="phaseIcon exit">🚪</div></div><div class="phasePct red" id="exitPhase">...</div><div class="phaseBar"><div class="fill red" id="exitPhaseBar"></div></div><div class="phaseHint">Фиксация прибыли<br>выход в стейблы</div></div></div><div class="flow"><div><b class="yellow">Покупка BTC</b><br>BTC.D &gt; 58%</div><div class="arrow">➡</div><div><b class="green">Переход в альты</b><br>BTC.D 45–50%</div><div class="arrow">➡</div><div><b class="red">Выход</b><br>BTC.D &lt; 40% + F&G &gt; 80</div></div></div>
  <div class="card"><div class="title">Вывод</div><div class="note" id="conclusion">Загрузка...</div><div class="small" id="updatedAt"></div></div>
 </section>
 <section id="signals" class="section"><div class="card"><div class="title">Сигналы</div><div id="signalList">Загрузка...</div><button onclick="refreshAll()">Проверить сейчас</button></div></section>

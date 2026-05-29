@@ -1,2 +1,2 @@
-Altseason Terminal v6.8.3 Compact Sources
-Убрана карточка Фокус. Источники и Онлайн встроены в сетку метрик рядом с Altseason, чтобы экран стал компактнее.
+Altseason Terminal v6.8.4 Strategy Icons
+Добавлены значки в блок BTC → ALT → EXIT: Bitcoin, рост альтов, красная дверь выхода.
