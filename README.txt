@@ -1,2 +1,2 @@
-Altseason Terminal v6.9 Pro Hybrid
-Гибрид лучших частей двух скриншотов: BTC, ALT, EXIT, круг совпадения, без Фокус.
+Altseason Terminal v6.9.1 Compact Row
+Источники и Онлайн перенесены в сетку рядом с Altseason. OTHERS.D показывает 'ввести TV'.
