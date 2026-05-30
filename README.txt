@@ -1,2 +1,2 @@
-Altseason Terminal v6.8.5 Strategy Icons
-SVG-иконки: Bitcoin, ALT rotation, clean red exit door. Без emoji.
+Altseason Terminal v6.9 Pro Hybrid
+Гибрид лучших частей двух скриншотов: BTC, ALT, EXIT, круг совпадения, без Фокус.
