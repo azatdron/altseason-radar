@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v7.0.1 Icon Fix</title>
+<title>Altseason Terminal v7.0.3 Right Ring</title>
 <meta name="theme-color" content="#050913">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -18,7 +18,7 @@ h1{font-size:22px;font-weight:950;letter-spacing:-.8px;line-height:1}
 .hero{display:grid;grid-template-columns:.9fr 1fr .68fr;gap:8px;align-items:center;background:linear-gradient(100deg,rgba(12,36,60,.96),rgba(10,67,38,.96));border:1px solid #246094;box-shadow:0 0 24px rgba(30,160,90,.12) inset;border-radius:17px;padding:10px;margin-bottom:8px;min-height:112px}
 .hero>div:nth-child(2){border-left:1px solid rgba(110,140,180,.28);padding-left:12px}
 .heroLabel{font-size:11px;color:#c8d5e8}.score{font-size:40px;font-weight:950;line-height:.95;margin:5px 0}.phase{font-size:13px;color:#ffd84c;font-weight:950}.phaseTitle{font-size:11px;color:#c8d5e8}.phaseMain{font-size:17px;font-weight:950;color:#ffd84c;line-height:1.05;margin-top:5px}.phaseSub{font-size:16px;font-weight:950;margin-top:8px}
-.donut{width:78px;height:78px;border-radius:50%;background:conic-gradient(from -90deg,#ffbd32 0deg,#f1d642 90deg,#72dd5a 187deg,#1b2b45 187deg,#1b2b45 360deg);display:flex;align-items:center;justify-content:center;position:relative;margin:auto;box-shadow:0 0 16px rgba(255,190,50,.24)}
+.donut{width:78px;height:78px;border-radius:50%;background:conic-gradient(from 0deg,#ffbd32 0deg,#d9ef52 95deg,#72dd5a 187deg,#1b2b45 187deg,#1b2b45 360deg);display:flex;align-items:center;justify-content:center;position:relative;margin:auto;box-shadow:0 0 16px rgba(255,190,50,.24)}
 .donut:before{content:"";position:absolute;inset:10px;border-radius:50%;background:#101827}.donutText{position:relative;text-align:center;font-size:20px;font-weight:950}.donutText small{display:block;font-size:9px;color:#d3def0;font-weight:800;line-height:1.05}
 .bar{height:5px;background:#1d2b44;border-radius:99px;margin-top:7px;overflow:hidden}.fill{height:100%;border-radius:99px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.metric{background:rgba(16,24,39,.96);border:1px solid var(--line);border-radius:14px;padding:7px;min-height:86px;box-shadow:0 0 14px rgba(50,120,255,.05) inset}.mTop{display:flex;justify-content:space-between;gap:3px}.mName{font-size:10.8px;font-weight:950;line-height:1.02}.src{font-size:8px;color:#8795ad;font-weight:950}.mVal{font-size:15px;font-weight:950;margin-top:5px;white-space:nowrap}.goal{font-size:8.6px;color:#d5dfef;margin-top:2px}.mStatus{font-size:8.6px;color:#d3ddeb;margin-top:5px;white-space:nowrap}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px}
@@ -36,7 +36,7 @@ input{width:100%;padding:10px;border:0;border-radius:12px;background:#182335;col
 </style>
 </head>
 <body>
-<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v7.0.1 Icon Fix</span> · Live BTC → ALT → EXIT</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
+<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v7.0.3 Right Ring</span> · Live BTC → ALT → EXIT</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
 <div class="tabs"><div class="tab active" onclick="openTab('radar',this)">Радар</div><div class="tab" onclick="openTab('signals',this)">Сигналы</div><div class="tab" onclick="openTab('portfolio',this)">Портфель</div></div>
 <section id="radar" class="section active">
 <div class="hero"><div><div class="heroLabel">Готовность рынка</div><div class="score">52%</div><div class="phase">Ранний переход</div><div class="bar"><div class="fill yellow" style="width:52%"></div></div></div><div><div class="phaseTitle">Фаза рынка</div><div class="phaseMain">Ротация в альты</div><div class="phaseSub">BTC → ALT</div></div><div class="donut"><div class="donutText">52%<small>совпадение<br>индикаторов</small></div></div></div>
@@ -47,11 +47,11 @@ input{width:100%;padding:10px;border:0;border-radius:12px;background:#182335;col
 <div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">ALT-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><path class="altLine" d="M10 34 20 24l7 7 12-16"/><path class="altLine" d="M31 15h8v8"/></svg></span></div><div class="phasePct green">45%</div><div class="phaseBar"><div class="fill green" style="width:45%"></div></div><div class="phaseHint">Ротация в альты<br>капитал переходит</div></div>
 <div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">EXIT-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><defs><linearGradient id="exitG" x1="0" x2="1"><stop offset="0" stop-color="#ff8b8b"/><stop offset=".55" stop-color="#ff5467"/><stop offset="1" stop-color="#d6293e"/></linearGradient></defs><path class="exitInside" d="M15 9h22v31H15z"/><path class="exitPanel" d="M18 10 36 6v36l-18-4z"/><path class="exitLine" d="M25 24h8"/><circle class="exitKnob" cx="29" cy="25" r="2"/></svg></span></div><div class="phasePct red">0%</div><div class="phaseBar"><div class="fill red" style="width:0%"></div></div><div class="phaseHint">Фиксация прибыли<br>выход в стейблы</div></div>
 </div><div class="flow"><div><b class="yellow">Покупка BTC</b><br>BTC.D &gt; 58%</div><div class="arrow">➡</div><div><b class="green">Переход в альты</b><br>BTC.D 45–50%</div><div class="arrow">➡</div><div><b class="red">Выход</b><br>F&G &gt; 80</div></div></div>
-<div class="card"><div class="title">Вывод</div><div class="note">Ранний переход. BTC.D ещё высокая, ETH/BTC пока слабый. Altseason ещё не начался.</div><div class="small" id="updatedAt"></div></div>
+<div class="card"><div class="title">Вывод</div><div class="note">Ранний переход. OTHERS.D берём из TradingView: CRYPTOCAP:OTHERS.D. Без него фаза ротации считается неполно.</div><div class="small" id="updatedAt"></div></div>
 </section>
 <section id="signals" class="section"><div class="card"><div class="title">Сигналы</div><div class="note">BTC.D близко к зоне перехода. OTHERS.D и Altseason Index пока не подтверждают полноценный альтсезон.</div></div></section>
 <section id="portfolio" class="section"><div class="card"><div class="title">Портфель</div><div class="note">Базовый экран портфеля.</div></div></section>
-<section id="settings" class="section"><div class="card"><div class="title">Настройки</div><input placeholder="OTHERS.D TradingView"><input placeholder="Altseason Index"><input placeholder="Fear & Greed"><button>Сохранить</button></div></section>
+<section id="settings" class="section"><div class="card"><div class="title">Настройки</div><input placeholder="OTHERS.D TradingView / CRYPTOCAP:OTHERS.D"><div class="small">Источник: TradingView → CRYPTOCAP:OTHERS.D</div><input placeholder="Altseason Index"><input placeholder="Fear & Greed"><button>Сохранить</button></div></section>
 <script>
 const metrics=[
 ["BTC.D","57.57%","40–45%","CG","yellow","далеко",56],
@@ -59,7 +59,7 @@ const metrics=[
 ["OTHERS/BTC","0.391","0.5+","CG","yellow","приближается",78],
 ["TOTAL3/BTC","0.571","0.85+","CG","red","далеко",67],
 ["ETH.D","9.54%","20%+","CG","red","далеко",48],
-["OTHERS.D","—","17–22%","TV","muted","нет данных",0],
+["OTHERS.D","—","17–22%","TV","muted","ввести TV",0],
 ["BTC","$73,116","$150k+","CG","red","далеко",49],
 ["ETH","$1,999","$7k+","CG","red","далеко",29],
 ["Fear&Greed","33","60–80","FG","red","страх",37],

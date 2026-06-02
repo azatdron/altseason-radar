@@ -1,2 +1,2 @@
-Altseason Terminal v7.0.1 Icon Fix
-BTC centered, improved red exit door, yellow-green 52% ring.
+Altseason Terminal v7.0.3 Right Ring
+Кольцо 52% теперь заполняется по правой стороне круга.
