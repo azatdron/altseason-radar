@@ -1,2 +1,2 @@
-Altseason Terminal v7.1 Live Data + Auto OTHERS.D
-BTC/ETH and dominance from CoinGecko API. OTHERS.D calculated automatically: 100 - BTC.D - ETH.D - USDT.D - USDC.D. Fear & Greed via alternative.me.
+Altseason Terminal v7.2 Market Intelligence
+Based on user v7.1 ZIP. Top gauge style, auto OTHERS.D, live BTC/ETH, Fear&Greed fallback, Altseason 46 fallback, ETF/RSI/MACD manual widgets.
