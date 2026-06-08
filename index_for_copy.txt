@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v7.0.3 Right Ring</title>
+<title>Altseason Terminal v7.1 Live Data</title>
 <meta name="theme-color" content="#050913">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -36,39 +36,65 @@ input{width:100%;padding:10px;border:0;border-radius:12px;background:#182335;col
 </style>
 </head>
 <body>
-<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v7.0.3 Right Ring</span> · Live BTC → ALT → EXIT</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
+<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v7.1 Live Data</span> · AUTO OTHERS.D</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
 <div class="tabs"><div class="tab active" onclick="openTab('radar',this)">Радар</div><div class="tab" onclick="openTab('signals',this)">Сигналы</div><div class="tab" onclick="openTab('portfolio',this)">Портфель</div></div>
 <section id="radar" class="section active">
-<div class="hero"><div><div class="heroLabel">Готовность рынка</div><div class="score">52%</div><div class="phase">Ранний переход</div><div class="bar"><div class="fill yellow" style="width:52%"></div></div></div><div><div class="phaseTitle">Фаза рынка</div><div class="phaseMain">Ротация в альты</div><div class="phaseSub">BTC → ALT</div></div><div class="donut"><div class="donutText">52%<small>совпадение<br>индикаторов</small></div></div></div>
+<div class="hero"><div><div class="heroLabel">Готовность рынка</div><div class="score" id="marketScore">...</div><div class="phase" id="marketPhase">Загрузка...</div><div class="bar"><div class="fill yellow" id="heroBar" style="width:0%"></div></div></div><div><div class="phaseTitle">Фаза рынка</div><div class="phaseMain" id="phaseMain">Загрузка...</div><div class="phaseSub">BTC → ALT</div></div><div class="donut" id="donut"><div class="donutText"><span id="donutScore">...</span><small>совпадение<br>индикаторов</small></div></div></div>
 <div class="grid" id="metricsGrid"></div>
 <div class="strategy"><div class="strategyTop"><div class="strategyTitle">BTC → ALT → EXIT</div><div class="what">ⓘ Что это?</div></div>
 <div class="phaseGrid">
-<div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">BTC-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><defs><radialGradient id="btcG" cx="35%" cy="25%"><stop offset="0%" stop-color="#fff08a"/><stop offset="45%" stop-color="#f7bf30"/><stop offset="100%" stop-color="#a96000"/></radialGradient></defs><circle class="btcCoin" cx="24" cy="24" r="18"/><circle class="btcRing" cx="24" cy="24" r="14"/><path class="btcMark" d="M22 11.5h4v4c4 .5 6.4 2.5 6.4 5.5 0 2.1-1 3.7-2.8 4.6 2.4.8 3.7 2.6 3.7 5.1 0 3.8-2.9 6.3-7.3 6.8v4h-4v-4h-3v4h-3v-4h-3.2v-4h2.8V17.5h-2.8v-4H16v-4h3v4h3v-4Zm-2.2 8v4.6h5.2c2 0 3.1-.8 3.1-2.3S27 19.5 25 19.5h-5.2Zm0 8.3v5.7h5.9c2.2 0 3.5-1 3.5-2.8s-1.3-2.9-3.6-2.9h-5.8Z"/></svg></span></div><div class="phasePct yellow">35%</div><div class="phaseBar"><div class="fill yellow" style="width:35%"></div></div><div class="phaseHint">Накопление BTC<br>высокая доминация</div></div>
-<div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">ALT-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><path class="altLine" d="M10 34 20 24l7 7 12-16"/><path class="altLine" d="M31 15h8v8"/></svg></span></div><div class="phasePct green">45%</div><div class="phaseBar"><div class="fill green" style="width:45%"></div></div><div class="phaseHint">Ротация в альты<br>капитал переходит</div></div>
-<div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">EXIT-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><defs><linearGradient id="exitG" x1="0" x2="1"><stop offset="0" stop-color="#ff8b8b"/><stop offset=".55" stop-color="#ff5467"/><stop offset="1" stop-color="#d6293e"/></linearGradient></defs><path class="exitInside" d="M15 9h22v31H15z"/><path class="exitPanel" d="M18 10 36 6v36l-18-4z"/><path class="exitLine" d="M25 24h8"/><circle class="exitKnob" cx="29" cy="25" r="2"/></svg></span></div><div class="phasePct red">0%</div><div class="phaseBar"><div class="fill red" style="width:0%"></div></div><div class="phaseHint">Фиксация прибыли<br>выход в стейблы</div></div>
+<div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">BTC-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><defs><radialGradient id="btcG" cx="35%" cy="25%"><stop offset="0%" stop-color="#fff08a"/><stop offset="45%" stop-color="#f7bf30"/><stop offset="100%" stop-color="#a96000"/></radialGradient></defs><circle class="btcCoin" cx="24" cy="24" r="18"/><circle class="btcRing" cx="24" cy="24" r="14"/><path class="btcMark" d="M22 11.5h4v4c4 .5 6.4 2.5 6.4 5.5 0 2.1-1 3.7-2.8 4.6 2.4.8 3.7 2.6 3.7 5.1 0 3.8-2.9 6.3-7.3 6.8v4h-4v-4h-3v4h-3v-4h-3.2v-4h2.8V17.5h-2.8v-4H16v-4h3v4h3v-4Zm-2.2 8v4.6h5.2c2 0 3.1-.8 3.1-2.3S27 19.5 25 19.5h-5.2Zm0 8.3v5.7h5.9c2.2 0 3.5-1 3.5-2.8s-1.3-2.9-3.6-2.9h-5.8Z"/></svg></span></div><div class="phasePct yellow" id="btcPhase">...</div><div class="phaseBar"><div class="fill yellow" id="btcPhaseBar" style="width:0%"></div></div><div class="phaseHint">Накопление BTC<br>высокая доминация</div></div>
+<div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">ALT-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><path class="altLine" d="M10 34 20 24l7 7 12-16"/><path class="altLine" d="M31 15h8v8"/></svg></span></div><div class="phasePct green" id="altPhase">...</div><div class="phaseBar"><div class="fill green" id="altPhaseBar" style="width:0%"></div></div><div class="phaseHint">Ротация в альты<br>капитал переходит</div></div>
+<div class="phaseBox"><div class="phaseHead"><div class="phaseLabel">EXIT-фаза</div><span class="ico"><svg viewBox="0 0 48 48"><defs><linearGradient id="exitG" x1="0" x2="1"><stop offset="0" stop-color="#ff8b8b"/><stop offset=".55" stop-color="#ff5467"/><stop offset="1" stop-color="#d6293e"/></linearGradient></defs><path class="exitInside" d="M15 9h22v31H15z"/><path class="exitPanel" d="M18 10 36 6v36l-18-4z"/><path class="exitLine" d="M25 24h8"/><circle class="exitKnob" cx="29" cy="25" r="2"/></svg></span></div><div class="phasePct red" id="exitPhase">...</div><div class="phaseBar"><div class="fill red" id="exitPhaseBar" style="width:0%"></div></div><div class="phaseHint">Фиксация прибыли<br>выход в стейблы</div></div>
 </div><div class="flow"><div><b class="yellow">Покупка BTC</b><br>BTC.D &gt; 58%</div><div class="arrow">➡</div><div><b class="green">Переход в альты</b><br>BTC.D 45–50%</div><div class="arrow">➡</div><div><b class="red">Выход</b><br>F&G &gt; 80</div></div></div>
 <div class="card"><div class="title">Вывод</div><div class="note">Ранний переход. OTHERS.D берём из TradingView: CRYPTOCAP:OTHERS.D. Без него фаза ротации считается неполно.</div><div class="small" id="updatedAt"></div></div>
 </section>
 <section id="signals" class="section"><div class="card"><div class="title">Сигналы</div><div class="note">BTC.D близко к зоне перехода. OTHERS.D и Altseason Index пока не подтверждают полноценный альтсезон.</div></div></section>
 <section id="portfolio" class="section"><div class="card"><div class="title">Портфель</div><div class="note">Базовый экран портфеля.</div></div></section>
-<section id="settings" class="section"><div class="card"><div class="title">Настройки</div><input placeholder="OTHERS.D TradingView / CRYPTOCAP:OTHERS.D"><div class="small">Источник: TradingView → CRYPTOCAP:OTHERS.D</div><input placeholder="Altseason Index"><input placeholder="Fear & Greed"><button>Сохранить</button></div></section>
+<section id="settings" class="section"><div class="card"><div class="title">Настройки API</div><input id="cgKey" placeholder="CoinGecko API Key (необязательно)"><input id="manualAltseason" placeholder="Altseason Index вручную, если нужен"><button onclick="saveSettings()">Сохранить</button><div class="small">OTHERS.D считается автоматически: 100 − BTC.D − ETH.D − USDT.D − USDC.D.</div></div></section>
 <script>
-const metrics=[
-["BTC.D","57.57%","40–45%","CG","yellow","далеко",56],
-["ETH/BTC","0.0275","0.045+","CG","red","далеко",61],
-["OTHERS/BTC","0.391","0.5+","CG","yellow","приближается",78],
-["TOTAL3/BTC","0.571","0.85+","CG","red","далеко",67],
-["ETH.D","9.54%","20%+","CG","red","далеко",48],
-["OTHERS.D","—","17–22%","TV","muted","ввести TV",0],
-["BTC","$73,116","$150k+","CG","red","далеко",49],
-["ETH","$1,999","$7k+","CG","red","далеко",29],
-["Fear&Greed","33","60–80","FG","red","страх",37],
-["Altseason","33/100","75+","CGI","red","далеко",44],
-["Источники","CG CoinGecko<br>TV TradingView<br>FG Fear&Greed<br>CGI CoinGlass","","DATA","muted","",0],
-["Онлайн","◉","Обновление 60 сек.","LIVE","green","",0]
+let market = {};
+const defs = [
+ {id:"btcD",name:"BTC.D",src:"CG",goal:"40–45%",type:"btcD"},
+ {id:"ethbtc",name:"ETH/BTC",src:"CG",goal:"0.045+",type:"higher",target:.045},
+ {id:"othersbtc",name:"OTHERS/BTC",src:"CG",goal:"0.5+",type:"higher",target:.5},
+ {id:"total3btc",name:"TOTAL3/BTC",src:"CG",goal:"0.85+",type:"higher",target:.85},
+ {id:"ethD",name:"ETH.D",src:"CG",goal:"20%+",type:"higher",target:20,fmt:"pct"},
+ {id:"othersD",name:"OTHERS.D",src:"AUTO",goal:"17–22%",type:"othersD"},
+ {id:"btc",name:"BTC",src:"CG",goal:"$150k+",type:"higher",target:150000,fmt:"money"},
+ {id:"eth",name:"ETH",src:"CG",goal:"$7k+",type:"higher",target:7000,fmt:"money"},
+ {id:"fear",name:"Fear&Greed",src:"FG",goal:"60–80",type:"range",low:60,high:80},
+ {id:"altseason",name:"Altseason",src:"MAN",goal:"75+",type:"higher",target:75},
+ {id:"sources",name:"Источники",src:"DATA",special:"sources"},
+ {id:"online",name:"Онлайн",src:"LIVE",special:"online"}
 ];
-function render(){metricsGrid.innerHTML=metrics.map(m=>{if(m[0]=="Источники")return `<div class="metric"><div class="mTop"><div class="mName">Источники</div><div class="src">DATA</div></div><div class="goal" style="font-size:8px;line-height:1.18;margin-top:8px">${m[1]}</div></div>`;if(m[0]=="Онлайн")return `<div class="metric"><div class="mTop"><div class="mName">Онлайн</div><div class="src">LIVE</div></div><div class="mVal green">◉</div><div class="goal">${m[2]}</div></div>`;return `<div class="metric"><div class="mTop"><div class="mName">${m[0]}</div><div class="src">${m[3]}</div></div><div class="mVal ${m[4]}">${m[1]}</div><div class="goal">Цель: ${m[2]}</div><div class="bar"><div class="fill ${m[4]=='muted'?'red':m[4]}" style="width:${m[6]}%"></div></div><div class="mStatus"><span class="dot ${m[4]}"></span>${m[5]}</div></div>`}).join("");updatedAt.textContent="Обновлено: "+new Date().toLocaleTimeString()}
-function openTab(id,el){document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));if(el)el.classList.add("active")}
-function refreshAll(){render()}render();
+function openTab(id,el){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));if(el)el.classList.add('active');}
+function clamp(n){return Math.max(0,Math.min(100,Math.round(n||0)))}
+function money(n){return '$'+Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0})}
+function pct(n){return Number(n||0).toFixed(2)+'%'}
+function val(d,v){if(v===undefined||v===null||Number.isNaN(Number(v)))return '—';if(d.fmt==='money')return money(v);if(d.fmt==='pct'||d.id==='btcD'||d.id==='ethD'||d.id==='othersD')return pct(v);if(d.id==='ethbtc')return Number(v).toFixed(4);if(d.id==='othersbtc'||d.id==='total3btc')return Number(v).toFixed(3);if(d.id==='altseason')return Number(v)+'/100';return v}
+function stat(d,v){v=Number(v);if(!v)return{score:null,label:'нет данных',c:'muted'};if(d.type==='btcD'){if(v<40)return{score:100,label:'перегрев',c:'green'};if(v<=45)return{score:100,label:'зона',c:'green'};if(v<=58)return{score:clamp(100-((v-45)/13)*45),label:'близко',c:'yellow'};return{score:clamp(40-(v-58)*3),label:'далеко',c:'red'}}
+ if(d.type==='othersD'){if(v>=22)return{score:100,label:'перегрев',c:'green'};if(v>=17)return{score:100,label:'зона',c:'green'};if(v>=14)return{score:75,label:'близко',c:'yellow'};return{score:clamp(v/14*50),label:'далеко',c:'red'}}
+ if(d.type==='range'){if(v>d.high)return{score:100,label:'перегрев',c:'green'};if(v>=d.low)return{score:100,label:'risk-on',c:'green'};if(v>=45)return{score:70,label:'нейтр.',c:'yellow'};return{score:clamp(v/45*50),label:'страх',c:'red'}}
+ let s=clamp(v/d.target*100);return{score:s,label:s>=100?'готово':s>=70?'близко':'далеко',c:s>=70?'yellow':'red'};}
+async function cg(url){let k=localStorage.getItem('cgKey')||'';let h=k?{'x-cg-demo-api-key':k}:{};let r=await fetch(url,{headers:h});if(!r.ok)throw new Error('CoinGecko API error');return r.json();}
+async function loadData(){try{
+ let g=await cg('https://api.coingecko.com/api/v3/global');
+ let p=await cg('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,usd-coin&vs_currencies=usd,btc&include_market_cap=true');
+ let mp=g.data.market_cap_percentage||{};
+ let total=g.data.total_market_cap.usd;
+ let btcM=p.bitcoin.usd_market_cap, ethM=p.ethereum.usd_market_cap, usdtM=p.tether.usd_market_cap, usdcM=p['usd-coin'].usd_market_cap;
+ let total3=total-btcM-ethM;
+ let others=total-btcM-ethM-usdtM-usdcM;
+ let othersD=100-(mp.btc||0)-(mp.eth||0)-(mp.usdt||0)-(mp.usdc||0);
+ market={btcD:mp.btc,ethD:mp.eth,btc:p.bitcoin.usd,eth:p.ethereum.usd,ethbtc:p.ethereum.btc,total3btc:total3/btcM,othersbtc:others/btcM,othersD:othersD,altseason:Number(localStorage.getItem('manualAltseason')||0)};
+ }catch(e){conclusion.textContent='Ошибка загрузки API. Проверь интернет или CoinGecko ключ в настройках.';console.log(e)}
+ try{let f=await fetch('https://api.alternative.me/fng/?limit=1&format=json');let j=await f.json();market.fear=Number(j.data[0].value);}catch(e){market.fear=Number(localStorage.getItem('manualFear')||0)}
+ render();}
+function render(){let scores=[];metricsGrid.innerHTML=defs.map(d=>{if(d.special==='sources')return `<div class="metric"><div class="mTop"><div class="mName">Источники</div><div class="src">DATA</div></div><div class="goal" style="font-size:8px;line-height:1.18;margin-top:8px">CG CoinGecko<br>AUTO OTHERS.D<br>FG Fear&Greed</div></div>`;if(d.special==='online')return `<div class="metric"><div class="mTop"><div class="mName">Онлайн</div><div class="src">LIVE</div></div><div class="mVal green">◉</div><div class="goal">Обновление 60 сек.</div></div>`;let s=stat(d,market[d.id]);if(s.score!==null)scores.push(s.score);let fill=s.c==='muted'?'red':s.c;return `<div class="metric"><div class="mTop"><div class="mName">${d.name}</div><div class="src">${d.src}</div></div><div class="mVal ${s.c}">${val(d,market[d.id])}</div><div class="goal">Цель: ${d.goal}</div><div class="bar"><div class="fill ${fill}" style="width:${s.score||0}%"></div></div><div class="mStatus"><span class="dot ${s.c}"></span>${s.label}</div></div>`}).join('');let avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;marketScore.textContent=avg+'%';donutScore.textContent=avg+'%';donut.style.setProperty('--deg',Math.round(avg*3.6)+'deg');heroBar.style.width=avg+'%';let phase=avg<40?'BTC-сезон':avg<65?'Ранний переход':avg<80?'Альтсезон близко':'Перегрев';marketPhase.textContent=phase;phaseMain.textContent=phase==='Ранний переход'?'Ротация в альты':phase;renderCycle();updatedAt.textContent='Обновлено: '+new Date().toLocaleTimeString();}
+function renderCycle(){let btc=0,alt=0,exit=0;if(market.btcD>58)btc+=40;if(market.ethbtc<.035)btc+=20;if(market.othersD<14)btc+=20;if((market.altseason||0)<25)btc+=20;if(market.btcD<58&&market.btcD>45)alt+=25;if(market.ethbtc>.035)alt+=20;if(market.othersD>14)alt+=25;if((market.altseason||0)>25)alt+=15;if(market.ethD>12)alt+=15;if(market.fear>=80)exit+=35;if(market.othersD>22)exit+=30;if((market.altseason||0)>90)exit+=25;if(market.btcD<40)exit+=10;btc=clamp(btc);alt=clamp(alt);exit=clamp(exit);btcPhase.textContent=btc+'%';altPhase.textContent=alt+'%';exitPhase.textContent=exit+'%';btcPhaseBar.style.width=btc+'%';altPhaseBar.style.width=alt+'%';exitPhaseBar.style.width=exit+'%';conclusion.textContent=market.othersD?`OTHERS.D рассчитана автоматически: ${pct(market.othersD)}. Рынок пока в переходной зоне, подтверждение альтсезона ещё не полное.`:'Данные загружаются...';}
+function refreshAll(){loadData();}
+function saveSettings(){localStorage.setItem('cgKey',cgKey.value.trim());localStorage.setItem('manualAltseason',manualAltseason.value.trim());alert('Сохранено');refreshAll();}
+loadData();setInterval(loadData,60000);
 </script>
 </body></html>
