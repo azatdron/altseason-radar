@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Altseason Terminal v7.2 Market Intelligence</title>
+<title>Altseason Terminal v7.1.1 Fixed Gauge</title>
 <meta name="theme-color" content="#050913">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -34,41 +34,19 @@ button{width:100%;padding:10px;border:0;border-radius:13px;background:var(--blue
 input{width:100%;padding:10px;border:0;border-radius:12px;background:#182335;color:white;font-size:12px;margin-top:7px}
 @media(max-width:390px){body{padding-left:6px;padding-right:6px}.hero{min-height:102px;padding:8px}.score{font-size:34px}.donut{width:68px;height:68px}.donutText{font-size:17px}.metric{min-height:78px;padding:6px}.mName{font-size:9.5px}.mVal{font-size:13.5px}.goal,.mStatus{font-size:7.8px}.strategyTitle{font-size:15px}.ico svg{width:30px;height:30px}.phasePct{font-size:18px}}
 
-.heroGauge{display:grid!important;grid-template-columns:1.05fr .95fr!important;min-height:154px!important;padding:14px!important;gap:16px!important}
-.heroGauge>div:nth-child(2){border-left:1px solid rgba(110,140,180,.28);padding-left:16px}
-.hint{color:#8795ad;font-size:12px}
-.speedGauge{position:relative;width:180px;height:98px;margin:4px auto 0;overflow:hidden}
-.speedGauge:before{content:"";position:absolute;left:0;top:0;width:180px;height:180px;border-radius:50%;background:conic-gradient(from 220deg,#ff334d 0deg,#ff334d 38deg,#ff941f 38deg,#ff941f 82deg,#ffd82e 82deg,#ffd82e 126deg,#a8ea23 126deg,#a8ea23 170deg,#22c978 170deg,#22c978 220deg,transparent 220deg,transparent 360deg)}
-.speedGauge:after{content:"";position:absolute;left:22px;top:22px;width:136px;height:136px;border-radius:50%;background:#101827;box-shadow:inset 0 0 22px rgba(0,0,0,.35)}
-.gaugeValue{position:absolute;z-index:3;left:0;right:0;top:36px;text-align:center}
-.gaugeValue span{font-size:38px;font-weight:950;line-height:.9}
-.gaugeValue small{display:block;font-size:12px;color:#ffd84c;font-weight:900;margin-top:8px}
-.gaugeKnob{position:absolute;z-index:4;width:24px;height:24px;border-radius:50%;background:#dfe6f4;border:4px solid #8997ad;left:139px;top:50px;box-shadow:0 0 0 2px rgba(255,255,255,.2)}
-.phaseBoxTop{display:flex;flex-direction:column;justify-content:center}
-.phaseBoxTop .phaseMain{font-size:28px!important;line-height:1.1!important}
-.phaseBoxTop .phaseSub{font-size:22px!important}
-@media(max-width:390px){.heroGauge{min-height:138px!important;padding:10px!important;gap:10px!important}.heroGauge>div:nth-child(2){padding-left:10px}.speedGauge{width:145px;height:82px}.speedGauge:before{width:145px;height:145px}.speedGauge:after{left:18px;top:18px;width:109px;height:109px}.gaugeValue{top:30px}.gaugeValue span{font-size:30px}.gaugeValue small{font-size:10px}.gaugeKnob{width:20px;height:20px;left:112px;top:41px}.phaseBoxTop .phaseMain{font-size:20px!important}.phaseBoxTop .phaseSub{font-size:17px!important}}
+/* v7.1.1 Fixed Gauge: right-side yellow-green ring, data logic preserved */
+.donut{
+  background:conic-gradient(from 0deg,#ffbd32 0deg,#d9ef52 calc(var(--deg) * .55),#72dd5a var(--deg),#1b2b45 var(--deg),#1b2b45 360deg)!important;
+  box-shadow:0 0 16px rgba(255,190,50,.24)!important;
+}
 
 </style>
 </head>
 <body>
-<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v7.2 Market Intelligence</span> · MARKET INTELLIGENCE</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
+<div class="top"><div><h1>Altseason Terminal</h1><div class="sub"><span class="ver">v7.1.1 Fixed Gauge</span> · AUTO OTHERS.D</div></div><div class="actions"><button class="round" onclick="refreshAll()">↻</button><button class="round" onclick="openTab('settings')">⚙</button></div></div>
 <div class="tabs"><div class="tab active" onclick="openTab('radar',this)">Радар</div><div class="tab" onclick="openTab('signals',this)">Сигналы</div><div class="tab" onclick="openTab('portfolio',this)">Портфель</div></div>
 <section id="radar" class="section active">
-<div class="hero heroGauge">
-  <div class="gaugeBox">
-    <div class="heroLabel">Готовность рынка <span class="hint">ⓘ</span></div>
-    <div class="speedGauge">
-      <div class="gaugeValue"><span id="marketScore">...</span><small id="marketPhase">Загрузка...</small></div>
-      <div class="gaugeKnob"></div>
-    </div>
-  </div>
-  <div class="phaseBoxTop">
-    <div class="heroLabel">Фаза рынка <span class="hint">ⓘ</span></div>
-    <div class="phaseMain" id="phaseMain">Загрузка...</div>
-    <div class="phaseSub">BTC → ALT</div>
-  </div>
-</div>
+<div class="hero"><div><div class="heroLabel">Готовность рынка</div><div class="score" id="marketScore">...</div><div class="phase" id="marketPhase">Загрузка...</div><div class="bar"><div class="fill yellow" id="heroBar" style="width:0%"></div></div></div><div><div class="phaseTitle">Фаза рынка</div><div class="phaseMain" id="phaseMain">Загрузка...</div><div class="phaseSub">BTC → ALT</div></div><div class="donut" id="donut"><div class="donutText"><span id="donutScore">...</span><small>совпадение<br>индикаторов</small></div></div></div>
 <div class="grid" id="metricsGrid"></div>
 <div class="strategy"><div class="strategyTop"><div class="strategyTitle">BTC → ALT → EXIT</div><div class="what">ⓘ Что это?</div></div>
 <div class="phaseGrid">
@@ -93,14 +71,7 @@ const defs = [
  {id:"btc",name:"BTC",src:"CG",goal:"$150k+",type:"higher",target:150000,fmt:"money"},
  {id:"eth",name:"ETH",src:"CG",goal:"$7k+",type:"higher",target:7000,fmt:"money"},
  {id:"fear",name:"Fear&Greed",src:"FG",goal:"60–80",type:"range",low:60,high:80},
- {id:"altseason",name:"Altseason Index",src:"MAN",goal:"75+",type:"higher",target:75},
-{id:"etf",name:"ETF Flow",src:"MAN",goal:"приток",type:"etf",fmt:"moneyShort"},
-{id:"rsi",name:"RSI рынок",src:"MAN",goal:"50+",type:"rsi"},
-{id:"macd",name:"MACD рынок",src:"MAN",goal:">0",type:"macd"},
-{id:"cmc20",name:"CMC20",src:"MAN",goal:"рост",type:"plain"},
-{id:"totalCap",name:"Общая кап.",src:"CG",goal:"рост",type:"plainMoney"},
-{id:"stableD",name:"Стейблы.D",src:"AUTO",goal:"ниже",type:"stable"},
-{id:"volume",name:"Объём 24ч",src:"CG",goal:"рост",type:"volume"},
+ {id:"altseason",name:"Altseason",src:"MAN",goal:"75+",type:"higher",target:75},
  {id:"sources",name:"Источники",src:"DATA",special:"sources"},
  {id:"online",name:"Онлайн",src:"LIVE",special:"online"}
 ];
@@ -127,8 +98,8 @@ async function loadData(){try{
  }catch(e){conclusion.textContent='Ошибка загрузки API. Проверь интернет или CoinGecko ключ в настройках.';console.log(e)}
  try{let f=await fetch('https://api.alternative.me/fng/?limit=1&format=json');let j=await f.json();market.fear=Number(j.data[0].value);}catch(e){market.fear=Number(localStorage.getItem('manualFear')||0)}
  render();}
-function render(){let scores=[];metricsGrid.innerHTML=defs.map(d=>{if(d.special==='sources')return `<div class="metric"><div class="mTop"><div class="mName">Источники</div><div class="src">DATA</div></div><div class="goal" style="font-size:8px;line-height:1.18;margin-top:8px">CG CoinGecko<br>MARKET INTELLIGENCE<br>FG Fear&Greed</div></div>`;if(d.special==='online')return `<div class="metric"><div class="mTop"><div class="mName">Онлайн</div><div class="src">LIVE</div></div><div class="mVal green">◉</div><div class="goal">Обновление 60 сек.</div></div>`;let s=stat(d,market[d.id]);if(s.score!==null)scores.push(s.score);let fill=s.c==='muted'?'red':s.c;return `<div class="metric"><div class="mTop"><div class="mName">${d.name}</div><div class="src">${d.src}</div></div><div class="mVal ${s.c}">${val(d,market[d.id])}</div><div class="goal">Цель: ${d.goal}</div><div class="bar"><div class="fill ${fill}" style="width:${s.score||0}%"></div></div><div class="mStatus"><span class="dot ${s.c}"></span>${s.label}</div></div>`}).join('');let avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;marketScore.textContent=avg+'%';donutScore.textContent=avg+'%';donut.style.setProperty('--deg',Math.round(avg*3.6)+'deg');heroBar.style.width=avg+'%';let phase=avg<40?'BTC-сезон':avg<65?'Ранний переход':avg<80?'Альтсезон близко':'Перегрев';marketPhase.textContent=phase;phaseMain.textContent=phase==='Ранний переход'?'Ротация в альты':phase;renderCycle();updatedAt.textContent='Обновлено: '+new Date().toLocaleTimeString();}
-function renderCycle(){let btc=0,alt=0,exit=0;if(market.btcD>55)btc+=30;if(market.ethbtc<.035)btc+=10;if(market.othersD<14)btc+=10;if((market.altseason||0)<25)btc+=10;if(market.btcD<58&&market.btcD>45)alt+=20;if(market.ethbtc>.035)alt+=20;if(market.othersD>14)alt+=25;if((market.altseason||0)>25)alt+=20;if(market.ethD>8)alt+=10;if(market.fear>=80)exit+=35; else if(market.fear<20)exit+=10;if(market.othersD>22)exit+=30;if((market.altseason||0)>90)exit+=25;if(market.btcD<40)exit+=10;btc=clamp(btc);alt=clamp(alt);exit=clamp(exit);btcPhase.textContent=btc+'%';altPhase.textContent=alt+'%';exitPhase.textContent=exit+'%';btcPhaseBar.style.width=btc+'%';altPhaseBar.style.width=alt+'%';exitPhaseBar.style.width=exit+'%';conclusion.textContent=market.othersD?`Market Intelligence: OTHERS.D рассчитана автоматически: ${pct(market.othersD)}. Рынок пока в переходной зоне, подтверждение альтсезона ещё не полное.`:'Данные загружаются...';}
+function render(){let scores=[];metricsGrid.innerHTML=defs.map(d=>{if(d.special==='sources')return `<div class="metric"><div class="mTop"><div class="mName">Источники</div><div class="src">DATA</div></div><div class="goal" style="font-size:8px;line-height:1.18;margin-top:8px">CG CoinGecko<br>AUTO OTHERS.D<br>FG Fear&Greed</div></div>`;if(d.special==='online')return `<div class="metric"><div class="mTop"><div class="mName">Онлайн</div><div class="src">LIVE</div></div><div class="mVal green">◉</div><div class="goal">Обновление 60 сек.</div></div>`;let s=stat(d,market[d.id]);if(s.score!==null)scores.push(s.score);let fill=s.c==='muted'?'red':s.c;return `<div class="metric"><div class="mTop"><div class="mName">${d.name}</div><div class="src">${d.src}</div></div><div class="mVal ${s.c}">${val(d,market[d.id])}</div><div class="goal">Цель: ${d.goal}</div><div class="bar"><div class="fill ${fill}" style="width:${s.score||0}%"></div></div><div class="mStatus"><span class="dot ${s.c}"></span>${s.label}</div></div>`}).join('');let avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;marketScore.textContent=avg+'%';donutScore.textContent=avg+'%';donut.style.setProperty('--deg',Math.round(avg*3.6)+'deg');heroBar.style.width=avg+'%';let phase=avg<40?'BTC-сезон':avg<65?'Ранний переход':avg<80?'Альтсезон близко':'Перегрев';marketPhase.textContent=phase;phaseMain.textContent=phase==='Ранний переход'?'Ротация в альты':phase;renderCycle();updatedAt.textContent='Обновлено: '+new Date().toLocaleTimeString();}
+function renderCycle(){let btc=0,alt=0,exit=0;if(market.btcD>58)btc+=40;if(market.ethbtc<.035)btc+=20;if(market.othersD<14)btc+=20;if((market.altseason||0)<25)btc+=20;if(market.btcD<58&&market.btcD>45)alt+=25;if(market.ethbtc>.035)alt+=20;if(market.othersD>14)alt+=25;if((market.altseason||0)>25)alt+=15;if(market.ethD>12)alt+=15;if(market.fear>=80)exit+=35;if(market.othersD>22)exit+=30;if((market.altseason||0)>90)exit+=25;if(market.btcD<40)exit+=10;btc=clamp(btc);alt=clamp(alt);exit=clamp(exit);btcPhase.textContent=btc+'%';altPhase.textContent=alt+'%';exitPhase.textContent=exit+'%';btcPhaseBar.style.width=btc+'%';altPhaseBar.style.width=alt+'%';exitPhaseBar.style.width=exit+'%';conclusion.textContent=market.othersD?`OTHERS.D рассчитана автоматически: ${pct(market.othersD)}. Рынок пока в переходной зоне, подтверждение альтсезона ещё не полное.`:'Данные загружаются...';}
 function refreshAll(){loadData();}
 function saveSettings(){localStorage.setItem('cgKey',cgKey.value.trim());localStorage.setItem('manualAltseason',manualAltseason.value.trim());alert('Сохранено');refreshAll();}
 loadData();setInterval(loadData,60000);
