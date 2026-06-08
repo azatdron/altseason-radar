@@ -1,2 +1,2 @@
-Altseason Terminal v7.1.2 Data Labels Fix
-Based on working v7.1.1. OTHERS.D labels fixed: 22-26% = active rotation, >26% = overheating. Altseason fallback set to 46/100.
+Altseason Terminal v7.1.3 Market Fix
+Fixes: OTHERS.D 22-28% active rotation, Altseason fallback 46/100, Fear&Greed fallback 14, smoother ring.
